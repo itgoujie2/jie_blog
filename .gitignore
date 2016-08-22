@@ -1,0 +1,5 @@
+/server/bin/
+/server/include/
+/server/lib/
+/server/.Python
+/server/pip-selfsheck.json
