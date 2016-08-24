@@ -1,12 +1,12 @@
 from index import db
 
-class Todo(db.model()):
+class Post(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
 	title = db.Column(db.String(255))
-	completed = db.Column(db.Boolean)
+	content = db.Column(db.String(255))
 
-	def __init__(self, title, completed):
+	def __init__(self, title, content):
 		self.title = title
-		self.completed = completed
+		self.content = content
 
 	

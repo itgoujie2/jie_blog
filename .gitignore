@@ -3,3 +3,5 @@
 /server/lib/
 /server/.Python
 /server/pip-selfsheck.json
+/server/migrations/
+.DS_Store
