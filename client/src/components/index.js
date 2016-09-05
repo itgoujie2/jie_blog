@@ -33,14 +33,14 @@ function mapDispatchToProps(dispatch){
 // 	}
 // }
 
-const Index = React.createClass({
+class Index extends React.Component{
 	// constructor(props){
 	// 	super(props)
 	// }, 
 
 	componentDidMount(){
 		this.props.getAllPosts()
-	}, 
+	}
 
 	render(){
 		return(
@@ -50,7 +50,7 @@ const Index = React.createClass({
 			</div>
 		)
 	}
-})
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)
 

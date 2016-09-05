@@ -2,25 +2,21 @@ const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
+	devtool: 'source-map', 
 	entry: [
-		// 'webpack-hot-middleware/client', 
-		// path.resolve(__dirname, 'src')
-		'./src/index.js'
+		'webpack-hot-middleware/client', 
+		path.resolve(__dirname, 'src/index.js')
+		// './src/index.js'
 	], 
 	output: {
-		// path: path.resolve(__dirname, 'dist'), 
-		path: './dist', 
+		path: path.resolve(__dirname, 'dist'), 
+		// path: './dist', 
 		filename: 'bundle.js', 
 		publicPath: '/static/'
 	}, 
 	resolve: {
-    	extensions: ['', '.jsx', '.js', '.json', '.scss'],
-    	modulesDirectories: ['node_modules', '../src'],
+    	extensions: ['', '.jsx', '.js', '.json', '.scss']
   	},
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(), 
-		new webpack.NoErrorsPlugin()
-	], 
 	module: {
 		loaders: [
 			{
@@ -32,5 +28,8 @@ module.exports = {
 		      }
 		    }
 		]
-	}
+	}, 
+	plugins: [
+		new webpack.HotModuleReplacementPlugin()
+	]
 }
