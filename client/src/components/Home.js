@@ -17,11 +17,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as actionCreators from '../actions/posts'
+import * as actionCreators from '../actions/saas'
 
 function mapStateToProps(state){
 	return {
-		posts: state.posts
+		saas: state.saas
 	}
 }
 
@@ -40,31 +40,32 @@ export default class Main extends React.Component{
 	}
 
 	fetchData(){
-		this.props.getAllPosts().then(() => {
-			console.log('props: ' + JSON.stringify(this.props))
-			this.props.posts.data.map( post => {
-				console.log(post.content)
-			})
-		})
+		this.props.getAllSaas()
+			.then(console.log(JSON.stringify(this.props.saas)))
 	}
 
 	render(){
 		return(
 			<div>
-				{!this.props.posts.loaded
+			<div>
+				{!this.props.saas.loaded || !this.props.saas.data
 					? <h1>loading...</h1>
 					:
 					<div>
-						{this.props.posts.data.map(post => {
+						{this.props.saas.data.map(saas => {
 							return(
-								<div key={post.id}>
-									<h2>{post.title}</h2>
-									<p>{post.content}</p>
+								<div key={saas.id}>
+									<h2>{saas.title}</h2>
+									<p>{saas.body}</p>
 								</div>
 							)
 						})}
 					</div>
 				}
+			</div>
+			<div>
+				<a href="createSaas">create saas</a>
+			</div>
 			</div>
 		)
 	}

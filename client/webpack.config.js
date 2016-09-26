@@ -6,13 +6,11 @@ module.exports = {
 	entry: [
 		'webpack-hot-middleware/client', 
 		path.resolve(__dirname, 'src/index.js')
-		// './src/index.js'
 	], 
 	output: {
 		path: path.resolve(__dirname, 'dist'), 
-		// path: './dist', 
 		filename: 'bundle.js', 
-		publicPath: '/static/'
+		publicPath: '/dist/'
 	}, 
 	resolve: {
     	extensions: ['', '.jsx', '.js', '.json', '.scss']

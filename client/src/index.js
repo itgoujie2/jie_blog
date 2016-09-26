@@ -7,6 +7,7 @@ import configureStore from './store/configureStore'
 import routes from './routes'
 import App from './components/App'
 import Home from './components/Home'
+import CreateSaas from './components/CreateSaas'
 // import 'style.scss'
 
 const store = configureStore()
@@ -15,9 +16,11 @@ const history = syncHistoryWithStore(browserHistory, store)
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
-			<Route path="/" component={Home}>
+			<Redirect from="/" to="home"/>
+			<Route path="/" component={App}>
+				<Route path="home" component={Home}/>
+				<Route path="createSaas" component={CreateSaas}/>
 			</Route>
-			
 		</Router>
 	</Provider>, 
 	document.getElementById('root')

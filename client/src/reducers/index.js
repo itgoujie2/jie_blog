@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import { posts } from './posts'
+import { saas } from './saas'
 import { routerReducer } from 'react-router-redux'
 
 const rootReducer = combineReducers({
 	routing: routerReducer, 
-	posts
+	saas
 })
 
 export default rootReducer

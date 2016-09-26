@@ -5,3 +5,5 @@
 /server/pip-selfsheck.json
 /server/migrations/
 .DS_Store
+/client/node_modules/
+/client/npm-debug.log
