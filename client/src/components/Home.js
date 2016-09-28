@@ -66,6 +66,9 @@ export default class Main extends React.Component{
 			<div>
 				<a href="createSaas">create saas</a>
 			</div>
+			<div>
+				<a href="login">login</a>
+			</div>
 			</div>
 		)
 	}

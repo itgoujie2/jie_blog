@@ -8,6 +8,7 @@ import routes from './routes'
 import App from './components/App'
 import Home from './components/Home'
 import CreateSaas from './components/CreateSaas'
+import Login from './components/Login'
 // import 'style.scss'
 
 const store = configureStore()
@@ -20,6 +21,7 @@ ReactDOM.render(
 			<Route path="/" component={App}>
 				<Route path="home" component={Home}/>
 				<Route path="createSaas" component={CreateSaas}/>
+				<Route path="login" component={Login}/>
 			</Route>
 		</Router>
 	</Provider>, 

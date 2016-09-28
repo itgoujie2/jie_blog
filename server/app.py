@@ -1,7 +1,7 @@
 from flask import request, jsonify, g
 from models import Saas
 from index import app, db
-from auth import verify_token
+from auth import verify_token, generate_token
 import logging
 
 @app.route('/api/saas_list', methods = ['GET'])
@@ -39,6 +39,15 @@ def create_saas():
 			title = 'blank', 
 			body = 'blank'
 		)	
+
+@app.route("/api/get_token", methods=["POST"])
+def get_token():
+    incoming = request.get_json()
+    user = User.get_user_with_email_and_password(incoming["email"], incoming["password"])
+    if user:
+        return jsonify(token=generate_token(user))
+
+    return jsonify(error=True), 403
 
 @app.route('/api/is_token_valid', methods = ['POST'])
 def is_token_valid():
