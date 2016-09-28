@@ -1,6 +1,7 @@
 from flask import request, jsonify, g
-from models import Saas
+from models import Saas, Account
 from index import app, db
+from sqlalchemy.exc import IntegrityError
 from auth import verify_token, generate_token
 import logging
 
@@ -38,12 +39,33 @@ def create_saas():
 		return jsonify(
 			title = 'blank', 
 			body = 'blank'
-		)	
+		)
+
+@app.route('/api/create_account', methods = ['POST'])
+def create_account():
+	incoming = request.get_json()
+	account = Account(
+		username = incoming['username'], 
+		password = incoming['password']
+	)
+	db.session.add(account)
+
+	try:
+		db.session.commit()
+	except IntegrityError:
+		return jsonify(message = 'Account with that email already exists'), 409
+
+	new_account = Account.query.filter_by(username = incoming['username']).first()
+
+	return jsonify(
+		id = account.id, 
+		token = generate_token(new_account)
+	)
 
 @app.route("/api/get_token", methods=["POST"])
 def get_token():
     incoming = request.get_json()
-    user = User.get_user_with_email_and_password(incoming["email"], incoming["password"])
+    account = Account.get_account_with_email_and_password(incoming["email"], incoming["password"])
     if user:
         return jsonify(token=generate_token(user))
 
