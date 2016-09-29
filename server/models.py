@@ -7,8 +7,8 @@ class Saas(db.Model):
 	body = db.Column(db.Text)
 	pub_date = db.Column(db.DateTime)
 
-	author_id = db.Column(db.Integer, db.ForeignKey('account.id'))
-	author = db.relationship('Account', backref = db.backref('saas_list', lazy = 'dynamic'))
+	# author_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+	# author = db.relationship('Account', backref = db.backref('saas_list', lazy = 'dynamic'))
 
 	def __init__(self, title, body, pub_date = None):
 		self.title = title
@@ -30,7 +30,7 @@ class Saas(db.Model):
 class Account(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
 	username = db.Column(db.String(50))
-	password = db.Column(db.String(50))
+	password = db.Column(db.String(200))
 
 	def __init__(self, username, password):
 		self.username = username
@@ -44,7 +44,7 @@ class Account(db.Model):
 		return bcrypt.generate_password_hash(password)
 
 	@staticmethod
-	def get_account_with_email_and_password(username, password):
+	def get_account_with_username_and_password(username, password):
 		account = Account.query.filter_by(username = username).first()
 		if account and bcrypt.check_password_hash(account.password, password):
 			return account

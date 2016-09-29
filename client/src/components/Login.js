@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions/auth'
 import { bindActionCreators } from 'redux'
+import { browserHistory } from 'react-router'
 
 function mapStateToProps(state){
 	return {
@@ -34,7 +35,10 @@ export default class LoginForm extends React.Component{
 		e.preventDefault()
 		console.log('username: ' + this.state.username)
 		console.log('password: ' + this.state.password)
-		this.props.loginUser(this.state.username, this.state.password)
+		this.props.loginAccount(this.state.username, this.state.password)
+			.then(() => {
+				browserHistory.push('home')
+			})
 	}
 
 	render(){

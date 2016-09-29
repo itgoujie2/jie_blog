@@ -48,6 +48,7 @@ def create_account():
 		username = incoming['username'], 
 		password = incoming['password']
 	)
+	app.logger.info('create account %s', account)
 	db.session.add(account)
 
 	try:
@@ -65,9 +66,9 @@ def create_account():
 @app.route("/api/get_token", methods=["POST"])
 def get_token():
     incoming = request.get_json()
-    account = Account.get_account_with_email_and_password(incoming["email"], incoming["password"])
-    if user:
-        return jsonify(token=generate_token(user))
+    account = Account.get_account_with_username_and_password(incoming["username"], incoming["password"])
+    if account:
+        return jsonify(token=generate_token(account))
 
     return jsonify(error=True), 403
 

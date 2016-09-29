@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions/auth'
 import { bindActionCreators } from 'redux'
+import { browserHistory } from 'react-router'
 
 function mapStateToProps(state){
 	return {
@@ -26,15 +27,18 @@ export default class RegisterForm extends React.Component{
 
 	handleKeyPress(e){
 		if (e.key === 'Enter'){
-			this.login(e)
+			this.register(e)
 		}
 	}
 
-	login(e){
+	register(e){
 		e.preventDefault()
 		console.log('username: ' + this.state.username)
 		console.log('password: ' + this.state.password)
-		this.props.createAccount(this.state.username, this.state.password)
+		this.props.registerAccount(this.state.username, this.state.password)
+			.then(() => {
+				browserHistory.push('home')
+			})
 	}
 
 	render(){
@@ -43,7 +47,7 @@ export default class RegisterForm extends React.Component{
 				<form>
 					<input onChange={(e) => {this.changeValue(e, 'username')}} placeholder="username"/>
 					<input onChange={(e) => {this.changeValue(e, 'password')}} placeholder="password"/>
-					<button onClick={(e) => {this.create(e)}}>create</button>
+					<button onClick={(e) => {this.register(e)}}>create</button>
 				</form>
 			</div>
 		)

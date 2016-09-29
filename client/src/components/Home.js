@@ -69,6 +69,9 @@ export default class Main extends React.Component{
 			<div>
 				<a href="login">login</a>
 			</div>
+			<div>
+				<a href="register">register</a>
+			</div>
 			</div>
 		)
 	}
