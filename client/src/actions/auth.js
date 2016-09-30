@@ -1,6 +1,6 @@
 import { browserHistory } from 'react-router'
 import jwtDecode from 'jwt-decode'
-import { LOGIN_ACCOUNT_SUCCESS, LOGIN_ACCOUNT_FAILURE, REGISTER_ACCOUNT_SUCCESS, REGISTER_ACCOUNT_FAILURE } from '../constants/index'
+import { LOGIN_ACCOUNT_SUCCESS, LOGIN_ACCOUNT_FAILURE, REGISTER_ACCOUNT_SUCCESS, REGISTER_ACCOUNT_FAILURE, ACCOUNT_LOGGEDOUT } from '../constants/index'
 
 export function loginAccountSuccess(token){
 	localStorage.setItem('token', token)
@@ -44,6 +44,13 @@ export function registerAccountFailure(error){
 	}
 }
 
+export function logoutAccount(){
+	localStorage.removeItem('token')
+	return {
+		type: ACCOUNT_LOGGEDOUT
+	}
+}
+
 export function loginAccount(username, password){
 	return (dispatch) => {
 		return fetch('/api/get_token', {
@@ -57,10 +64,12 @@ export function loginAccount(username, password){
 				password: password
 			})
 		})
+			.then(response => response.json())
 			.then(res => {
 				try{
 					let decoded = jwtDecode(res.token)
-					dispatch(loginUserSuccess(res.token))
+					console.log('got token from login: ' + decoded)
+					dispatch(loginAccountSuccess(res.token))
 				}
 				catch(e){
 					console.error(e)
@@ -91,6 +100,7 @@ export function registerAccount(username, password){
 				password: password
 			})
 		})
+			.then(response => response.json())
 			.then(res => {
 				try{
 					let decoded = jwtDecode(res.token)
@@ -110,4 +120,5 @@ export function registerAccount(username, password){
 			})
 	}
 }
+
 

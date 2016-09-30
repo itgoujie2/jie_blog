@@ -21,7 +21,8 @@ import * as actionCreators from '../actions/saas'
 
 function mapStateToProps(state){
 	return {
-		saas: state.saas
+		saas: state.saas, 
+		auth: state.auth
 	}
 }
 
@@ -43,6 +44,14 @@ export default class Main extends React.Component{
 		this.props.getAllSaas()
 			.then(console.log(JSON.stringify(this.props.saas)))
 	}
+
+	// logout(e){
+	// 	e.preventDefault()
+	// 	this.props.logoutAccount()
+	// 		.then(() => {
+	// 			console.log('logged out')
+	// 		})
+	// }
 
 	render(){
 		return(
@@ -72,6 +81,7 @@ export default class Main extends React.Component{
 			<div>
 				<a href="register">register</a>
 			</div>
+			
 			</div>
 		)
 	}

@@ -1,5 +1,6 @@
-from index import db, bcrypt
+from index import app, db, bcrypt
 from datetime import datetime
+import logging
 
 class Saas(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
@@ -46,7 +47,9 @@ class Account(db.Model):
 	@staticmethod
 	def get_account_with_username_and_password(username, password):
 		account = Account.query.filter_by(username = username).first()
+		app.logger.info('got account based on username %s', account)
 		if account and bcrypt.check_password_hash(account.password, password):
+			app.logger.info('token match, returned account password %s', password)
 			return account
 		else:
 			return None

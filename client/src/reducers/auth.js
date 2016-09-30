@@ -1,4 +1,4 @@
-import { LOGIN_ACCOUNT_SUCCESS, LOGIN_ACCOUNT_FAILURE, REGISTER_ACCOUNT_SUCCESS, REGISTER_ACCOUNT_FAILURE } from '../constants/index'
+import { LOGIN_ACCOUNT_SUCCESS, LOGIN_ACCOUNT_FAILURE, REGISTER_ACCOUNT_SUCCESS, REGISTER_ACCOUNT_FAILURE, ACCOUNT_LOGGEDOUT } from '../constants/index'
 import jwtDecode from 'jwt-decode'
 
 const initialState = {
@@ -36,6 +36,12 @@ export function auth(state = initialState, action){
 				'token': null, 
 				'username': null, 
 				'statusText': `Register Error: ${action.payload.status} ${action.payload.statusText}`
+			})
+		case ACCOUNT_LOGGEDOUT:
+			return Object.assign({}, state, {
+				'isAuthenticated': false, 
+				'token': null, 
+				'username': null
 			})
 
 		default:
