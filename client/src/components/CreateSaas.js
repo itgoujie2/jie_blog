@@ -38,6 +38,7 @@ export default class SaasForm extends React.Component{
 
 	createSaas(e){
 		e.preventDefault()
+		console.log('author in create saas page: ' + localStorage.getItem('account_id'))
 		this.props.createSaas(this.state.title, this.state.body)
 			.then(() => {
 				browserHistory.push('home')

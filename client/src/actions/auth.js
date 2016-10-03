@@ -44,14 +44,15 @@ export function registerAccountFailure(error){
 	}
 }
 
-export function logoutAccount(){
+export function logoutAccount(cb){
 	localStorage.removeItem('token')
+	cb()
 	return {
 		type: ACCOUNT_LOGGEDOUT
 	}
 }
 
-export function loginAccount(username, password){
+export function loginAccount(email, password){
 	return (dispatch) => {
 		return fetch('/api/get_token', {
 			method: 'POST', 
@@ -60,7 +61,7 @@ export function loginAccount(username, password){
 				'Content-Type': 'application/json'
 			}, 
 			body: JSON.stringify({
-				username: username, 
+				email: email, 
 				password: password
 			})
 		})
@@ -68,7 +69,7 @@ export function loginAccount(username, password){
 			.then(res => {
 				try{
 					let decoded = jwtDecode(res.token)
-					console.log('got token from login: ' + decoded)
+					console.log('res from login: ' + JSON.stringify(res))
 					dispatch(loginAccountSuccess(res.token))
 				}
 				catch(e){
@@ -87,7 +88,7 @@ export function loginAccount(username, password){
 	}
 }
 
-export function registerAccount(username, password){
+export function registerAccount(email, password){
 	return (dispatch) => {
 		return fetch('/api/create_account', {
 			method: 'POST', 
@@ -96,7 +97,7 @@ export function registerAccount(username, password){
 				'Content-Type': 'application/json'
 			}, 
 			body: JSON.stringify({
-				username: username, 
+				email: email, 
 				password: password
 			})
 		})

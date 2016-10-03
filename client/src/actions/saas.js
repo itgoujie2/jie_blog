@@ -54,7 +54,8 @@ export function createSaas(title, body){
 		  	},
 			body: JSON.stringify({
 				title: title, 
-				body: body
+				body: body, 
+				token: localStorage.getItem('token')
 			})
 		})
 			.then(response => response.json())

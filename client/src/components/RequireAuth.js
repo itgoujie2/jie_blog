@@ -28,42 +28,71 @@ export function requireAuth(Component){
 			this.checkAuth(nextProps)
 		}
 
-		checkAuth(props = this.props){
-			if (!props.isAuthenticated){
-				let token localStorage.getItem('token')
-				if (!token){
-					browserHistory.push('/login')
-				}
-				else{
-					return fetch('api/is_token_valid', {
-						method: 'post', 
-						headers: {
-							'Accept': 'applicatoin/json', 
-							'Content-Type': 'applicatoin/json'
-						}, 
-						body: JSON.stringify({token: token})
-					})
-						.then(res => {
-							if (res.status === 200){
-								// this.props.loginUserSuccess(token)
-								this.setState({
-									token_still_valid: true
-								})
-							}
-						})
-				}
-			}
-			else {
-				this.setState({
-					token_still_valid: true
-				})
-			}
-		}
+		// checkAuth(props = this.props){
+		// 	if (!props.isAuthenticated){
+		// 		let token = localStorage.getItem('token')
+		// 		if (!token){
+		// 			browserHistory.push('/login')
+		// 		}
+		// 		else{
+		// 			return fetch('api/is_token_valid', {
+		// 				method: 'POST', 
+		// 				headers: {
+		// 					'Accept': 'applicatoin/json', 
+		// 					'Content-Type': 'applicatoin/json'
+		// 				}, 
+		// 				body: JSON.stringify({token: token})
+		// 			})
+		// 				.then(response => response.json())
+		// 				.then(res => {
+		// 					if (res.status === 200){
+		// 						// this.props.loginUserSuccess(token)
+		// 						this.setState({
+		// 							token_still_valid: true
+		// 						})
+		// 					}
+		// 				})
+		// 		}
+		// 	}
+		// 	else {
+		// 		this.setState({
+		// 			token_still_valid: true
+		// 		})
+		// 	}
+		// }
+		checkAuth(props = this.props) {
+            if (!props.isAuthenticated) {
+                let token = localStorage.getItem('token')
+                if (!token) {
+                    browserHistory.push('/login')
+
+                } else {
+                    return fetch('api/is_token_valid', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({token: token})
+                    })
+                        .then(res => {
+                            if (res.status === 200) {
+                            	this.props.loginAccountSuccess(token)
+								console.log(JSON.stringify(this.props))
+                            } else {
+                                browserHistory.push('/home')
+
+                            }
+                        })
+
+                }
+            }
+        }
 
 		render(){
 			return (
 				<div>
-					{this.props.isAuthenticated && this.props.token_still_valid
+					{this.props.isAuthenticated 
 						? <Component {...this.props}/>
 						: null
 					}	

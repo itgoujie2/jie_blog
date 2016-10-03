@@ -2,7 +2,7 @@ from flask import request, jsonify, g
 from models import Saas, Account
 from index import app, db
 from sqlalchemy.exc import IntegrityError
-from auth import verify_token, generate_token
+from auth import verify_token, generate_token, decode_token
 import logging
 
 @app.route('/api/saas_list', methods = ['GET'])
@@ -18,10 +18,16 @@ def create_saas():
 	incoming = request.get_json()
 	app.logger.info('incoming request %s', incoming)
 
+	decoded = decode_token(request.get_json().get('token'))
+	app.logger.info('decode %s', decoded)
+
 	saas = Saas(
 		title = request.get_json().get('title'), 
-		body = request.get_json().get('body')
+		body = request.get_json().get('body'), 
+		author_id = decode_token(request.get_json().get('token')).get('id')
 	)
+
+	app.logger.info('create saas %s', saas)
 
 	db.session.add(saas)
 	db.session.commit()
@@ -33,7 +39,9 @@ def create_saas():
 	if new_saas:
 		return jsonify(
 			title = new_saas.title, 
-			body = new_saas.body
+			body = new_saas.body, 
+			votes = new_saas.votes, 
+			pub_date = new_saas.pub_date
 		)
 	else:
 		return jsonify(
@@ -45,7 +53,7 @@ def create_saas():
 def create_account():
 	incoming = request.get_json()
 	account = Account(
-		username = incoming['username'], 
+		email = incoming['email'], 
 		password = incoming['password']
 	)
 	app.logger.info('create account %s', account)
@@ -56,17 +64,17 @@ def create_account():
 	except IntegrityError:
 		return jsonify(message = 'Account with that email already exists'), 409
 
-	new_account = Account.query.filter_by(username = incoming['username']).first()
+	new_account = Account.query.filter_by(email = incoming['email']).first()
 
 	return jsonify(
-		id = account.id, 
 		token = generate_token(new_account)
 	)
 
 @app.route("/api/get_token", methods=["POST"])
 def get_token():
     incoming = request.get_json()
-    account = Account.get_account_with_username_and_password(incoming["username"], incoming["password"])
+    app.logger.info('request in get_token %s', request)
+    account = Account.get_account_with_email_and_password(incoming["email"], incoming["password"])
     if account:
         return jsonify(token=generate_token(account))
 
@@ -75,6 +83,7 @@ def get_token():
 @app.route('/api/is_token_valid', methods = ['POST'])
 def is_token_valid():
 	incoming = request.get_json()
+	app.logger.info('token in is_token_valid %s', request)
 	is_valid = verify_token(incoming['token'])
 
 	if is_valid:

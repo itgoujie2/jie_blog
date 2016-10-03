@@ -11,9 +11,15 @@ def generate_token(account, expiration=TWO_WEEKS):
     s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
     token = s.dumps({
         'id': account.id,
-        'username': account.username,
+        'email': account.email,
     })
     return token
+
+def decode_token(token, expiration=TWO_WEEKS):
+    s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
+    decoded = s.loads(token)
+
+    return decoded
 
 
 def verify_token(token):
@@ -31,9 +37,9 @@ def requires_auth(f):
         token = request.headers.get('Authorization', None)
         if token:
             string_token = token.encode('ascii', 'ignore')
-            user = verify_token(string_token)
-            if user:
-                g.current_user = user
+            account = verify_token(string_token)
+            if account:
+                g.current_account = account
                 return f(*args, **kwargs)
 
         return jsonify(message="Authentication is required to access this resource"), 401

@@ -33,9 +33,9 @@ export default class RegisterForm extends React.Component{
 
 	register(e){
 		e.preventDefault()
-		console.log('username: ' + this.state.username)
+		console.log('email: ' + this.state.email)
 		console.log('password: ' + this.state.password)
-		this.props.registerAccount(this.state.username, this.state.password)
+		this.props.registerAccount(this.state.email, this.state.password)
 			.then(() => {
 				browserHistory.push('home')
 			})
@@ -45,7 +45,7 @@ export default class RegisterForm extends React.Component{
 		return(
 			<div onKeyPress={(e) => this.handleKeyPress(e)}>
 				<form>
-					<input onChange={(e) => {this.changeValue(e, 'username')}} placeholder="username"/>
+					<input onChange={(e) => {this.changeValue(e, 'email')}} placeholder="email"/>
 					<input onChange={(e) => {this.changeValue(e, 'password')}} placeholder="password"/>
 					<button onClick={(e) => {this.register(e)}}>create</button>
 				</form>

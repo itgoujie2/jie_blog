@@ -1,0 +1,21 @@
+.nav{
+	height: 50px;
+	background-color: grey;
+
+	.container{
+		height: 100%;
+	}
+}
+
+.nav-item{
+	
+	vertical-align: middle;
+}
+
+.nav-logo{
+	display: inline-block;
+	padding: 11px 0;
+	color: #fff;
+	font-size: 20px;
+	float: left;
+}
