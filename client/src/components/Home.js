@@ -18,6 +18,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index'
+import { Link } from 'react-router'
 
 function mapStateToProps(state){
 	return {
@@ -55,7 +56,7 @@ export default class Main extends React.Component{
 		for (let i = start; i < end; i++){
 			const saasCards = saas_list.slice(i*4, i*4 + chunk).map( (saas, j) => {
 				return (
-					<div className='card col-sm-3' key={saas.id}>
+					<Link className='card col-sm-3' key={saas.id} to={`/saas/${saas.id}`}>
 						<img className='card-img-top'/>
 						<div className='card-block'>
 							<h4 className='card-title'>{saas.title}</h4>
@@ -65,7 +66,7 @@ export default class Main extends React.Component{
 							<span>{saas.author_id}</span>
 							<span className='pull-xs-right'>{saas.votes}</span>
 						</div>
-					</div>
+					</Link>
 				)
 			})
 

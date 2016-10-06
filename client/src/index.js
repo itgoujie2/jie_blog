@@ -10,6 +10,7 @@ import Home from './components/Home'
 import CreateSaas from './components/CreateSaas'
 import Login from './components/Login'
 import Register from './components/Register'
+import SaasDetail from './components/SaasDetail'
 import { requireAuth } from './components/RequireAuth'
 import './styles/index.scss'
 
@@ -25,6 +26,7 @@ ReactDOM.render(
 				<Route path="createSaas" component={requireAuth(CreateSaas)}/>
 				<Route path="login" component={Login}/>
 				<Route path="register" component={Register}/>
+				<Route path="/saas/:saasId" component={SaasDetail}/>
 			</Route>
 		</Router>
 	</Provider>, 
