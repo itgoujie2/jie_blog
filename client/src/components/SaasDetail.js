@@ -16,13 +16,17 @@ function mapDispatchToProps(dispatch){
 export default class DetailComponent extends React.Component{
 
 	componentDidMount(){
-		console.log('route params: ' + this.props.params.saasId)
+		console.log('route params: ' + this.props.location.query.saas_id)
+		this.props.getSaasDetail(this.props.location.query.saas_id)
+			.then(() => {
+
+			})
 	}
 
 	render(){
 		return(
-			<div>
-				{this.props.params.saasId}
+			<div className='container'>
+				{this.props.location.query.saas_id}
 			</div>
 		)
 	}

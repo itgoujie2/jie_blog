@@ -56,7 +56,7 @@ export default class Main extends React.Component{
 		for (let i = start; i < end; i++){
 			const saasCards = saas_list.slice(i*4, i*4 + chunk).map( (saas, j) => {
 				return (
-					<Link className='card col-sm-3' key={saas.id} to={`/saas/${saas.id}`}>
+					<Link className='card col-sm-3' key={saas.id} to={`/saas?saas_id=${saas.id}`}>
 						<img className='card-img-top'/>
 						<div className='card-block'>
 							<h4 className='card-title'>{saas.title}</h4>

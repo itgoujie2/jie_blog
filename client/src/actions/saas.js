@@ -31,6 +31,19 @@ export function getAllSaas(){
 	}
 }
 
+export function getSaasDetail(saas_id){
+	return (dispatch) => {
+		return fetch('/api/saas_detail?saas_id=' + saas_id)
+			.then(response => response.json())
+			.then(json => {
+				console.log('saas detail: ' + JSON.stringify(json))
+			})
+			.catch(error => {
+
+			})
+	}
+}
+
 export function createdSaas(new_saas){
 	console.log('in action createSaas: ' + JSON.stringify(new_saas))
 	return{

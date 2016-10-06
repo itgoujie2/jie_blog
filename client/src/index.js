@@ -26,7 +26,7 @@ ReactDOM.render(
 				<Route path="createSaas" component={requireAuth(CreateSaas)}/>
 				<Route path="login" component={Login}/>
 				<Route path="register" component={Register}/>
-				<Route path="/saas/:saasId" component={SaasDetail}/>
+				<Route path="/saas" component={SaasDetail}/>
 			</Route>
 		</Router>
 	</Provider>, 

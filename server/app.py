@@ -12,6 +12,26 @@ def all_saas():
 	if saas_list:
 		return jsonify(data = [e.serialize() for e in saas_list])
 
+@app.route('/api/saas_detail', methods = ['GET'])
+def saas_detail():
+	saas_id = request.args.get('saas_id')
+	app.logger.info('the saas id %s', saas_id)
+	saas_detail = Saas.query.filter_by(id = saas_id).first()
+
+	if saas_detail:
+		return jsonify(
+			id = saas_detail.id, 
+			title = saas_detail.title, 
+			body = saas_detail.body, 
+			votes = saas_detail.votes, 
+			pub_date = saas_detail.pub_date
+		)
+	else:
+		return jsonify(
+			title = 'blank', 
+			body = 'blank'
+		)
+
 @app.route('/api/create_saas', methods = ['POST'])
 def create_saas():
 

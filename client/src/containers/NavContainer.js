@@ -29,7 +29,7 @@ class NavContainer extends React.Component{
 	render(){
 		return (
 			<nav className='navbar navbar-light bg-faded'>
-				<a className='navbar-brand' href='home'>a<span className='red-text'>saas</span>tion</a>
+				<a className='navbar-brand' href='/home'>a<span className='red-text'>saas</span>tion</a>
 				<ul className='nav navbar-nav'>
 					<li className='nav-item'>
 						<a className='nav-link' href='createSaas'>create</a>
