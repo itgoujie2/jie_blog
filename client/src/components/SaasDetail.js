@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index'
+import Disqus from './Disqus'
 
 function mapStateToProps(state){
 	return{
@@ -23,10 +24,20 @@ export default class DetailComponent extends React.Component{
 			})
 	}
 
+	handleNewComment(comment){
+		console.log('new comment: ' + comment.text)
+	}
+
 	render(){
 		return(
 			<div className='container'>
 				{this.props.location.query.saas_id}
+				<Disqus 
+				shortname='asaastion' 
+				identifier={this.props.location.query.saas_id} 
+				title={this.props.saas.title}
+				category_id='category_1'
+				onNewComment={this.handleNewComment}/>
 			</div>
 		)
 	}
