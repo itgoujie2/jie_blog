@@ -39,5 +39,8 @@ module.exports = {
 	plugins: [
 		new ExtractTextPlugin('bundle.css'),
 		new webpack.HotModuleReplacementPlugin()
-	]
+	], 
+	node: {
+		child_process: 'empty'
+	}
 }

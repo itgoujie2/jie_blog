@@ -39,10 +39,14 @@ export default class SaasForm extends React.Component{
 	createSaas(e){
 		e.preventDefault()
 		console.log('author in create saas page: ' + localStorage.getItem('account_id'))
-		this.props.createSaas(this.state.title, this.state.body)
+
+		this.props.createSaas(this.state.title, this.state.body, this.state.url)
 			.then(() => {
 				browserHistory.push('home')
-			})
+			})		
+			
+
+		
 	}
 
 	render(){
@@ -55,6 +59,9 @@ export default class SaasForm extends React.Component{
 					<div className="form-group row">
 						<input className="form-control" type="text" name="body" onChange={(e) => this.changeValue(e, 'body')}/>
 					</div>	
+					<div className="form-group row">
+						<input className="form-control" type="text" name="url" onChange={(e) => this.changeValue(e, 'url')}/>
+					</div>
 					<button type="submit" onClick={(e) => this.createSaas(e)} className="btn btn-primary">Create Saas</button>
 				</form>
 			</div>

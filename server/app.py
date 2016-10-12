@@ -3,6 +3,7 @@ from models import Saas, Account
 from index import app, db
 from sqlalchemy.exc import IntegrityError
 from auth import verify_token, generate_token, decode_token
+from image import screenshot_from_user_url
 import logging
 
 @app.route('/api/saas_list', methods = ['GET'])
@@ -37,6 +38,8 @@ def create_saas():
 
 	incoming = request.get_json()
 	app.logger.info('incoming request %s', incoming)
+
+	screenshot_from_user_url(request.get_json().get('url'))
 
 	decoded = decode_token(request.get_json().get('token'))
 	app.logger.info('decode %s', decoded)

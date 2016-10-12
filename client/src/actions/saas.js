@@ -55,7 +55,7 @@ export function createdSaas(new_saas){
 	}
 }
 
-export function createSaas(title, body){
+export function createSaas(title, body, url){
 	
 	return (dispatch) => {
 
@@ -68,6 +68,7 @@ export function createSaas(title, body){
 			body: JSON.stringify({
 				title: title, 
 				body: body, 
+				url: url, 
 				token: localStorage.getItem('token')
 			})
 		})
