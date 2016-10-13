@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { routeActions, push } from 'react-router-redux'
 import { create_saas } from '../utils/http_functions'
-import { FETCH_ALL_SAAS, RECEIVED_ALL_SAAS, CREATED_SAAS } from '../constants/index'
+import { FETCH_ALL_SAAS, RECEIVED_ALL_SAAS, CREATED_SAAS, RECEIVED_CATEGORY } from '../constants/index'
 
 export function fetchAllSaas(){
 	return{
@@ -13,6 +13,27 @@ export function receivedAllSaas(saas_list){
 	return{
 		type: RECEIVED_ALL_SAAS, 
 		saas_list
+	}
+}
+
+export function receivedCategories(category_list){
+	return{
+		type: RECEIVED_CATEGORY, 
+		category_list
+	}
+}
+
+export function getCategories(){
+	return (dispatch) => {
+		return fetch('/api/category_list')
+			.then(response => response.json())
+			.then(json => {
+				console.log('res data: ' + JSON.stringify(json.data))
+				dispatch(receivedCategories(json.data))
+			})
+			.catch(error => {
+
+			})
 	}
 }
 
@@ -55,7 +76,7 @@ export function createdSaas(new_saas){
 	}
 }
 
-export function createSaas(title, body, url){
+export function createSaas(title, body, url, category){
 	
 	return (dispatch) => {
 
@@ -69,6 +90,7 @@ export function createSaas(title, body, url){
 				title: title, 
 				body: body, 
 				url: url, 
+				category: category, 
 				token: localStorage.getItem('token')
 			})
 		})

@@ -1,4 +1,4 @@
-import { FETCH_ALL_SAAS, RECEIVED_ALL_SAAS, CREATED_SAAS } from '../constants/index'
+import { FETCH_ALL_SAAS, RECEIVED_ALL_SAAS, CREATED_SAAS, RECEIVED_CATEGORY } from '../constants/index'
 
 export function saas(state = {loaded: false}, action){
 	switch(action.type){
@@ -10,6 +10,10 @@ export function saas(state = {loaded: false}, action){
 			return Object.assign({}, state, {
 				'data': action.saas_list, 
 				'loaded': true
+			})
+		case RECEIVED_CATEGORY:
+			return Object.assign({}, state, {
+				'category_list': action.category_list
 			})
 		case CREATED_SAAS:
 			return Object.assign({}, state, {

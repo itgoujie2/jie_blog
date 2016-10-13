@@ -1,6 +1,5 @@
 import sys
 import time
-import os
 
 from flask import Flask, Response, request
 
@@ -48,7 +47,7 @@ def screenshot_from_user_url(url):
 
     sys.stderr.write(driver.execute_script("return document.readyState") + "\n")
 
-    png = driver.save_screenshot(os.path.join('/example.png'))
+    png64 = driver.save_screenshot('./example.png')
     driver.quit()
 
     # return Response(png, mimetype="image/png")

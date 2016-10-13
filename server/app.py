@@ -1,5 +1,5 @@
 from flask import request, jsonify, g
-from models import Saas, Account
+from models import Saas, Account, Category
 from index import app, db
 from sqlalchemy.exc import IntegrityError
 from auth import verify_token, generate_token, decode_token
@@ -12,6 +12,13 @@ def all_saas():
 
 	if saas_list:
 		return jsonify(data = [e.serialize() for e in saas_list])
+
+@app.route('/api/category_list', methods = ['GET'])
+def all_category():
+	category_list = Category.query.all()
+
+	if category_list:
+		return jsonify(data = [e.serialize() for e in category_list])
 
 @app.route('/api/saas_detail', methods = ['GET'])
 def saas_detail():
@@ -47,6 +54,7 @@ def create_saas():
 	saas = Saas(
 		title = request.get_json().get('title'), 
 		body = request.get_json().get('body'), 
+		category_id = request.get_json().get('category'), 
 		author_id = decode_token(request.get_json().get('token')).get('id')
 	)
 

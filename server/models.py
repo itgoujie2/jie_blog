@@ -12,14 +12,19 @@ class Saas(db.Model):
 	author_id = db.Column(db.Integer, db.ForeignKey('account.id'))
 	author = db.relationship('Account', backref = db.backref('saas_list', lazy = 'dynamic'))
 
-	def __init__(self, title, body, author_id, votes = 0, pub_date = None):
+	category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+	category = db.relationship('Category', backref = db.backref('saas_list', lazy = 'dynamic'))
+
+	def __init__(self, title, body, category_id, author_id, votes = 0, pub_date = None):
 		self.title = title
 		self.body = body
 		self.author_id = author_id
 		self.votes = votes
+		self.pub_date = pub_date
+		self.category_id = category_id
 		
 		if pub_date is None:
-			pub_date = datetime.utcnow()
+			self.pub_date = datetime.utcnow()
 
 	def serialize(self):
 		return{
@@ -27,11 +32,29 @@ class Saas(db.Model):
 			'title': self.title, 
 			'body': self.body, 
 			'votes': self.votes, 
-			'author_id': self.author_id
+			'author_id': self.author_id, 
+			'category_id': self.category_id, 
+			'pub_date': self.pub_date
 		}
 
 	def __repr__(self):
 		return '<Saas %r>' % self.title
+
+class Category(db.Model):
+	id = db.Column(db.Integer(), primary_key = True)
+	name = db.Column(db.String(255))
+
+	def __init__(self, name):
+		self.name = name
+
+	def serialize(self):
+		return{
+			'id': self.id, 
+			'name': self.name
+		}
+
+	def __repr__(self):
+		return 'Category: %r' % self.name
 
 class Account(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
