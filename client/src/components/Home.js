@@ -22,7 +22,7 @@ import { Link } from 'react-router'
 
 function mapStateToProps(state){
 	return {
-		saas: state.saas, 
+		star: state.star, 
 		auth: state.auth
 	}
 }
@@ -42,48 +42,51 @@ export default class Main extends React.Component{
 	}
 
 	fetchData(){
-		this.props.getAllSaas()
-			.then(console.log(JSON.stringify(this.props.saas)))
+		this.props.getAllStar()
+			.then(console.log(JSON.stringify(this.props.star)))
 	}
 
-	renderSaas(){
+	renderStar(){
 		const chunk = 4
-		const saas_list = this.props.saas.data
+		const star_list = this.props.star.data
 		const start = 0
-		const end = saas_list.length / 4 + 1
+		const end = star_list.length / 4 + 1
 		const results = []
 
 		for (let i = start; i < end; i++){
-			const saasCards = saas_list.slice(i*4, i*4 + chunk).map( (saas, j) => {
+			const starCards = star_list.slice(i*4, i*4 + chunk).map( (star, j) => {
+				console.log('star detail in for loop: ' + JSON.stringify(star))
 				return (
-					<Link className='card col-sm-3' key={saas.id} to={`/saas?saas_id=${saas.id}`}>
-						<img className='card-img-top'/>
-						<div className='card-block'>
-							<h4 className='card-title'>{saas.title}</h4>
-							<p className='card-text'>{saas.body}</p>
+					
+					<a href={`/star?star_id=${star.id}`} key={star.id} className='mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--4dp'>
+						<div className='mdl-card__title'>
+							<h2 className='mdl-card__title-text'>{star.name}</h2>
 						</div>
-						<div className='card-block'>
-							<span>{saas.author_id}</span>
-							<span className='pull-xs-right'>{saas.votes}</span>
+						<div className='mdl-card__supporting-text'>
+							{star.tagline}
 						</div>
-					</Link>
+						<div className='mdl-card__actions mdl-card-boarder'>
+							<span className='mdl-button mdl-button-colored'>test</span>
+							
+						</div>
+					</a>
 				)
 			})
 
 			// TODO: placeholder cards
 
-			// if (saasCards.length < chunk){
-			// 	console.log('saasCards length: ' + saasCards.length)
+			// if (starCards.length < chunk){
+			// 	console.log('starCards length: ' + starCards.length)
 			// 	console.log('chunk: ' + chunk)
-			// 	for (let k=0; k < chunk - saasCards.length + 1; k++){
+			// 	for (let k=0; k < chunk - starCards.length + 1; k++){
 			// 		console.log('k: ' + k)
-			// 		saasCards.push(<div className='col-sm-3' key={`placeholder-${k}`}>{k}</div>)
+			// 		starCards.push(<div className='col-sm-3' key={`placeholder-${k}`}>{k}</div>)
 			// 	}
 			// }
 
 			results.push(
-				<div className='row' key={i}>
-					{saasCards}
+				<div className='mdl-grid content-grid' key={i}>
+					{starCards}
 				</div>
 			)
 		}
@@ -93,17 +96,17 @@ export default class Main extends React.Component{
 
 	render(){
 		return(
-			<div className='container-fluid'>
-				<div >
-					{!this.props.saas.loaded || !this.props.saas.data
-						? <h1>loading...</h1>
-						:
-						<div >
-							{this.renderSaas()}
-						</div>
-					}
-				</div>
+			
+			<div >
+				{!this.props.star.loaded || !this.props.star.data
+					? <h1>loading...</h1>
+					:
+					<div >
+						{this.renderStar()}
+					</div>
+				}
 			</div>
+			
 		)
 	}
 }

@@ -2,59 +2,90 @@ from index import app, db, bcrypt
 from datetime import datetime
 import logging
 
-class Saas(db.Model):
+class Star(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
-	title = db.Column(db.String(255))
-	body = db.Column(db.Text)
-	votes = db.Column(db.Integer)
 	pub_date = db.Column(db.DateTime)
 
 	author_id = db.Column(db.Integer, db.ForeignKey('account.id'))
-	author = db.relationship('Account', backref = db.backref('saas_list', lazy = 'dynamic'))
+	author = db.relationship('Account', backref = db.backref('star', lazy = 'dynamic'))
 
-	category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-	category = db.relationship('Category', backref = db.backref('saas_list', lazy = 'dynamic'))
+	# link section
+	personal_url = db.Column(db.String(255))
+	github_url = db.Column(db.String(255))
+	linkedin_url = db.Column(db.String(255))
+	twitter_url = db.Column(db.String(255))
+	facebook_url = db.Column(db.String(255))
+	# text section
+	name = db.Column(db.String(255))
+	title = db.Column(db.String(255))
+	tagline = db.Column(db.String(255))
+	skill_1 = db.Column(db.String(255))
+	skill_2 = db.Column(db.String(255))
+	skill_3 = db.Column(db.String(255))
+	rating_1 = db.Column(db.Integer)
+	rating_2 = db.Column(db.Integer)
+	rating_3 = db.Column(db.Integer)
+	answer_1 = db.Column(db.Text)
+	answer_2 = db.Column(db.Text)
+	answer_3 = db.Column(db.Text)
+	answer_4 = db.Column(db.Text)
+	answer_5 = db.Column(db.Text)
 
-	def __init__(self, title, body, category_id, author_id, votes = 0, pub_date = None):
-		self.title = title
-		self.body = body
+	def __init__(self, name, title, tagline, author_id, personal_url, github_url, linkedin_url, 
+		twitter_url, facebook_url, skill_1, skill_2, 
+		skill_3, rating_1, rating_2, rating_3, answer_1, answer_2, answer_3, 
+		answer_4, answer_5):
+
 		self.author_id = author_id
-		self.votes = votes
-		self.pub_date = pub_date
-		self.category_id = category_id
-		
-		if pub_date is None:
-			self.pub_date = datetime.utcnow()
+		self.personal_url = personal_url
+		self.github_url = github_url
+		self.linkedin_url = linkedin_url
+		self.twitter_url = twitter_url
+		self.facebook_url = facebook_url
+		self.name = name
+		self.title = title
+		self.tagline = tagline
+		self.skill_1 = skill_1
+		self.skill_2 = skill_2
+		self.skill_3 = skill_3
+		self.rating_1 = rating_1
+		self.rating_2 = rating_2
+		self.rating_3 = rating_3
+		self.answer_1 = answer_1
+		self.answer_2 = answer_2
+		self.answer_3 = answer_3
+		self.answer_4 = answer_4
+		self.answer_5 = answer_5
+		self.pub_date = datetime.utcnow()
+
+	def __repr__(self):
+		return 'Star: %r' % self.name
 
 	def serialize(self):
 		return{
 			'id': self.id, 
-			'title': self.title, 
-			'body': self.body, 
-			'votes': self.votes, 
 			'author_id': self.author_id, 
-			'category_id': self.category_id, 
+			'personal_url': self.personal_url, 
+			'github_url': self.github_url, 
+			'linkedin_url': self.linkedin_url, 
+			'twitter_url': self.twitter_url, 
+			'facebook_url': self.facebook_url, 
+			'name': self.name, 
+			'title': self.title, 
+			'tagline': self.tagline, 
+			'skill_1': self.skill_1, 
+			'skill_2': self.skill_2, 
+			'skill_3': self.skill_3, 
+			'rating_1': self.rating_1, 
+			'rating_2': self.rating_2, 
+			'rating_3': self.rating_3, 
+			'answer_1': self.answer_1, 
+			'answer_2': self.answer_2, 
+			'answer_3': self.answer_3, 
+			'answer_4': self.answer_4, 
+			'answer_5': self.answer_5, 
 			'pub_date': self.pub_date
 		}
-
-	def __repr__(self):
-		return '<Saas %r>' % self.title
-
-class Category(db.Model):
-	id = db.Column(db.Integer(), primary_key = True)
-	name = db.Column(db.String(255))
-
-	def __init__(self, name):
-		self.name = name
-
-	def serialize(self):
-		return{
-			'id': self.id, 
-			'name': self.name
-		}
-
-	def __repr__(self):
-		return 'Category: %r' % self.name
 
 class Account(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)

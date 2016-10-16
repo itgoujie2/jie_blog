@@ -6,7 +6,7 @@ import Disqus from './Disqus'
 
 function mapStateToProps(state){
 	return{
-		saas: state.saas
+		star: state.star
 	}
 }
 
@@ -17,8 +17,7 @@ function mapDispatchToProps(dispatch){
 export default class DetailComponent extends React.Component{
 
 	componentDidMount(){
-		console.log('route params: ' + this.props.location.query.saas_id)
-		this.props.getSaasDetail(this.props.location.query.saas_id)
+		this.props.getStarDetail(this.props.location.query.star_id)
 			.then(() => {
 
 			})
@@ -31,11 +30,11 @@ export default class DetailComponent extends React.Component{
 	render(){
 		return(
 			<div className='container'>
-				{this.props.location.query.saas_id}
+				{this.props.location.query.star_id}
 				<Disqus 
 				shortname='asaastion' 
-				identifier={this.props.location.query.saas_id} 
-				title={this.props.saas.title}
+				identifier={this.props.location.query.star_id} 
+				title={this.props.star.name}
 				category_id='category_1'
 				onNewComment={this.handleNewComment}/>
 			</div>
@@ -43,6 +42,6 @@ export default class DetailComponent extends React.Component{
 	}
 }
 
-const SaasDetail = connect(mapStateToProps, mapDispatchToProps)(DetailComponent)
+const StarDetail = connect(mapStateToProps, mapDispatchToProps)(DetailComponent)
 
-module.exports = SaasDetail
+module.exports = StarDetail

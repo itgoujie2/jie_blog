@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index'
+import { Layout, Header, HeaderRow, Navigation } from 'react-mdl/lib'
 
 function mapStateToProps(state){
 	return{
@@ -28,21 +29,20 @@ class NavContainer extends React.Component{
 
 	render(){
 		return (
-			<nav className='navbar navbar-light bg-faded'>
-				<a className='navbar-brand' href='/home'>a<span className='red-text'>saas</span>tion</a>
-				<ul className='nav navbar-nav'>
-					<li className='nav-item'>
-						<a className='nav-link' href='createSaas'>create</a>
-					</li>
-					<li className='nav-item pull-xs-right'>
+			<header className='mdl-layout__header'>
+				<div className='mdl-layout__header-row'>
+					<span className='mdl-layout__title'><a href='home'>coder_star</a></span>
+					<div className='mdl-layout-spacer'></div>
+					<nav className='mdl-navigation mdl-typography--body-1-force-preferred-font'>
+						<a className='mdl-navigation__link' href='createStar'>create</a>
 						{
 							localStorage.getItem('token') ? 
-							<a className='nav-link' href='#' onClick={ (e) => {this.logout(e)} }>logout</a> : 
-							<a className='nav-link' href='login'>login</a>
+							<a className='mdl-navigation__link' href='#' onClick={ (e) => {this.logout(e)} }>logout</a> : 
+							<a className='mdl-navigation__link' href='login'>login</a>
 						}
-					</li>
-				</ul>
-			</nav>
+					</nav>
+				</div>
+			</header>
 		)
 	}
 }

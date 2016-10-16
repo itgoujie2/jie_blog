@@ -1,11 +1,11 @@
 import { logoutAccount, loginAccount, registerAccount } from './auth'
-import { getAllSaas, createSaas, getSaasDetail } from './saas'
+import { getAllStar, createStar, getStarDetail } from './star'
 
 export{
 	loginAccount, 
 	registerAccount, 
 	logoutAccount, 
-	getAllSaas, 
-	createSaas, 
-	getSaasDetail
+	getAllStar, 
+	createStar, 
+	getStarDetail
 }

@@ -1,83 +1,121 @@
 from flask import request, jsonify, g
-from models import Saas, Account, Category
+from models import Star, Account
 from index import app, db
 from sqlalchemy.exc import IntegrityError
 from auth import verify_token, generate_token, decode_token
-from image import screenshot_from_user_url
 import logging
 
-@app.route('/api/saas_list', methods = ['GET'])
-def all_saas():
-	saas_list = Saas.query.all()
+@app.route('/api/star_list', methods = ['GET'])
+def all_star():
+	star_list = Star.query.all()
 
-	if saas_list:
-		return jsonify(data = [e.serialize() for e in saas_list])
+	if star_list:
+		return jsonify(data = [e.serialize() for e in star_list])
 
-@app.route('/api/category_list', methods = ['GET'])
-def all_category():
-	category_list = Category.query.all()
 
-	if category_list:
-		return jsonify(data = [e.serialize() for e in category_list])
+@app.route('/api/star_detail', methods = ['GET'])
+def star_detail():
+	star_id = request.args.get('star_id')
+	app.logger.info('the star id %s', star_id)
+	star_detail = Star.query.filter_by(id = star_id).first()
 
-@app.route('/api/saas_detail', methods = ['GET'])
-def saas_detail():
-	saas_id = request.args.get('saas_id')
-	app.logger.info('the saas id %s', saas_id)
-	saas_detail = Saas.query.filter_by(id = saas_id).first()
-
-	if saas_detail:
+	if star_detail:
 		return jsonify(
-			id = saas_detail.id, 
-			title = saas_detail.title, 
-			body = saas_detail.body, 
-			votes = saas_detail.votes, 
-			pub_date = saas_detail.pub_date
+			id = star_detail.id, 
+			name = star_detail.name, 
+			title = star_detail.title, 
+			tagline = star_detail.tagline, 
+			author_id = star_detail.author_id, 
+			personal_url = star_detail.personal_url, 
+			github_url = star_detail.github_url, 
+			linkedin_url = star_detail.linkedin_url, 
+			twitter_url = star_detail.twitter_url, 
+			facebook_url = star_detail.facebook_url, 
+			skill_1 = star_detail.skill_1, 
+			skill_2 = star_detail.skill_2, 
+			skill_3 = star_detail.skill_3, 
+			rating_1 = star_detail.rating_1, 
+			rating_2 = star_detail.rating_2, 
+			rating_3 = star_detail.rating_3, 
+			answer_1 = star_detail.answer_1, 
+			answer_2 = star_detail.answer_2, 
+			answer_3 = star_detail.answer_3, 
+			answer_4 = star_detail.answer_4, 
+			answer_5 = star_detail.answer_5
 		)
 	else:
 		return jsonify(
-			title = 'blank', 
-			body = 'blank'
+			error = True
 		)
 
-@app.route('/api/create_saas', methods = ['POST'])
-def create_saas():
+@app.route('/api/create_star', methods = ['POST'])
+def create_star():
 
 	incoming = request.get_json()
 	app.logger.info('incoming request %s', incoming)
 
-	screenshot_from_user_url(request.get_json().get('url'))
-
 	decoded = decode_token(request.get_json().get('token'))
 	app.logger.info('decode %s', decoded)
 
-	saas = Saas(
+	star = Star(
+		name = request.get_json().get('name'), 
 		title = request.get_json().get('title'), 
-		body = request.get_json().get('body'), 
-		category_id = request.get_json().get('category'), 
-		author_id = decode_token(request.get_json().get('token')).get('id')
+		tagline = request.get_json().get('tagline'), 
+		author_id = decode_token(request.get_json().get('token')).get('id'), 
+		personal_url = request.get_json().get('personal_url'), 
+		github_url = request.get_json().get('github_url'), 
+		linkedin_url = request.get_json().get('linkedin_url'), 
+		twitter_url = request.get_json().get('twitter_url'), 
+		facebook_url = request.get_json().get('facebook_url'), 
+		skill_1 = request.get_json().get('skill_1'), 
+		skill_2 = request.get_json().get('skill_2'), 
+		skill_3 = request.get_json().get('skill_3'), 
+		rating_1 = request.get_json().get('rating_1'), 
+		rating_2 = request.get_json().get('rating_2'), 
+		rating_3 = request.get_json().get('rating_3'), 
+		answer_1 = request.get_json().get('answer_1'), 
+		answer_2 = request.get_json().get('answer_2'), 
+		answer_3 = request.get_json().get('answer_3'), 
+		answer_4 = request.get_json().get('answer_4'), 
+		answer_5 = request.get_json().get('answer_5')
 	)
 
-	app.logger.info('create saas %s', saas)
+	app.logger.info('create star %s', star)
 
-	db.session.add(saas)
+	db.session.add(star)
 	db.session.commit()
 
-	new_saas = Saas.query.filter_by(title = request.get_json().get('title')).first()
+	new_star = Star.query.filter_by(name = request.get_json().get('name')).first()
 
-	app.logger.info('found new_saas %s', new_saas)
+	app.logger.info('found new_star %s', new_star)
 
-	if new_saas:
+	if new_star:
 		return jsonify(
-			title = new_saas.title, 
-			body = new_saas.body, 
-			votes = new_saas.votes, 
-			pub_date = new_saas.pub_date
+			id = star_detail.id, 
+			name = star_detail.name, 
+			title = star_detail.title, 
+			tagline = star_detail.tagline, 
+			author_id = star_detail.author_id, 
+			personal_url = star_detail.personal_url, 
+			github_url = star_detail.github_url, 
+			linkedin_url = star_detail.linkedin_url, 
+			twitter_url = star_detail.twitter_url, 
+			facebook_url = star_detail.facebook_url, 
+			skill_1 = star_detail.skill_1, 
+			skill_2 = star_detail.skill_2, 
+			skill_3 = star_detail.skill_3, 
+			rating_1 = star_detail.rating_1, 
+			rating_2 = star_detail.rating_2, 
+			rating_3 = star_detail.rating_3, 
+			answer_1 = star_detail.answer_1, 
+			answer_2 = star_detail.answer_2, 
+			answer_3 = star_detail.answer_3, 
+			answer_4 = star_detail.answer_4, 
+			answer_5 = star_detail.answer_5
 		)
 	else:
 		return jsonify(
-			title = 'blank', 
-			body = 'blank'
+			error = True
 		)
 
 @app.route('/api/create_account', methods = ['POST'])

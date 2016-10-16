@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
-import { saas } from './saas'
+import { star } from './star'
 import { auth } from './auth'
 import { routerReducer } from 'react-router-redux'
 
 const rootReducer = combineReducers({
 	routing: routerReducer, 
-	saas, 
+	star, 
 	auth
 })
 

@@ -7,11 +7,13 @@ import configureStore from './store/configureStore'
 import routes from './routes'
 import App from './containers/App'
 import Home from './components/Home'
-import CreateSaas from './components/CreateSaas'
+import CreateStar from './components/CreateStar'
 import Login from './components/Login'
 import Register from './components/Register'
-import SaasDetail from './components/SaasDetail'
+import StarDetail from './components/StarDetail'
 import { requireAuth } from './components/RequireAuth'
+import 'react-mdl/extra/material.css'
+import 'react-mdl/extra/material.js'
 import './styles/index.scss'
 
 const store = configureStore()
@@ -23,10 +25,10 @@ ReactDOM.render(
 			<Redirect from="/" to="home"/>
 			<Route path="/" component={App}>
 				<Route path="home" component={Home}/>
-				<Route path="createSaas" component={requireAuth(CreateSaas)}/>
+				<Route path="createStar" component={requireAuth(CreateStar)}/>
 				<Route path="login" component={Login}/>
 				<Route path="register" component={Register}/>
-				<Route path="/saas" component={SaasDetail}/>
+				<Route path="/star" component={StarDetail}/>
 			</Route>
 		</Router>
 	</Provider>, 
