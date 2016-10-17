@@ -15,6 +15,7 @@ import { requireAuth } from './components/RequireAuth'
 import 'react-mdl/extra/material.css'
 import 'react-mdl/extra/material.js'
 import './styles/index.scss'
+import './styles/materialadmin.css'
 
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
