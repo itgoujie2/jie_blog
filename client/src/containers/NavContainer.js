@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index'
-import { Layout, Header, HeaderRow, Navigation } from 'react-mdl/lib'
 
 function mapStateToProps(state){
 	return{

@@ -11,6 +11,8 @@ def all_story():
 
 	if story_list:
 		return jsonify(data = [e.serialize() for e in story_list])
+	else:
+		return jsonify()
 
 
 @app.route('/api/story_detail', methods = ['GET'])
@@ -44,9 +46,7 @@ def story_detail():
 			answer_5 = story_detail.answer_5
 		)
 	else:
-		return jsonify(
-			error = True
-		)
+		return jsonify()
 
 @app.route('/api/create_story', methods = ['POST'])
 def create_story():
@@ -114,9 +114,7 @@ def create_story():
 			answer_5 = new_story.answer_5
 		)
 	else:
-		return jsonify(
-			error = True
-		)
+		return jsonify()
 
 @app.route('/api/create_account', methods = ['POST'])
 def create_account():

@@ -1,5 +1,4 @@
 import NavContainer from './NavContainer'
-import { Content } from 'react-mdl/lib'
 var React = require('react');
 
 export default class App extends React.Component{

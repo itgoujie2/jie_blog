@@ -4,6 +4,7 @@
 /server/.Python
 /server/pip-selfsheck.json
 /server/migrations/
+/server/ghostdriver.log
 .DS_Store
 /client/node_modules/
 /client/npm-debug.log

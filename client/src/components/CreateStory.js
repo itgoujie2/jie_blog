@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/story'
 import { routeActions } from 'react-router-redux'
 import { browserHistory } from 'react-router'
-import { TextField } from 'react-mdl'
 import StarRatingComponent from 'react-star-rating-component'
 
 function mapStateToProps(state){
