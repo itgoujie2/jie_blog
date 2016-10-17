@@ -91,27 +91,27 @@ def create_star():
 
 	if new_star:
 		return jsonify(
-			id = star_detail.id, 
-			name = star_detail.name, 
-			title = star_detail.title, 
-			tagline = star_detail.tagline, 
-			author_id = star_detail.author_id, 
-			personal_url = star_detail.personal_url, 
-			github_url = star_detail.github_url, 
-			linkedin_url = star_detail.linkedin_url, 
-			twitter_url = star_detail.twitter_url, 
-			facebook_url = star_detail.facebook_url, 
-			skill_1 = star_detail.skill_1, 
-			skill_2 = star_detail.skill_2, 
-			skill_3 = star_detail.skill_3, 
-			rating_1 = star_detail.rating_1, 
-			rating_2 = star_detail.rating_2, 
-			rating_3 = star_detail.rating_3, 
-			answer_1 = star_detail.answer_1, 
-			answer_2 = star_detail.answer_2, 
-			answer_3 = star_detail.answer_3, 
-			answer_4 = star_detail.answer_4, 
-			answer_5 = star_detail.answer_5
+			id = new_star.id, 
+			name = new_star.name, 
+			title = new_star.title, 
+			tagline = new_star.tagline, 
+			author_id = new_star.author_id, 
+			personal_url = new_star.personal_url, 
+			github_url = new_star.github_url, 
+			linkedin_url = new_star.linkedin_url, 
+			twitter_url = new_star.twitter_url, 
+			facebook_url = new_star.facebook_url, 
+			skill_1 = new_star.skill_1, 
+			skill_2 = new_star.skill_2, 
+			skill_3 = new_star.skill_3, 
+			rating_1 = new_star.rating_1, 
+			rating_2 = new_star.rating_2, 
+			rating_3 = new_star.rating_3, 
+			answer_1 = new_star.answer_1, 
+			answer_2 = new_star.answer_2, 
+			answer_3 = new_star.answer_3, 
+			answer_4 = new_star.answer_4, 
+			answer_5 = new_star.answer_5
 		)
 	else:
 		return jsonify(

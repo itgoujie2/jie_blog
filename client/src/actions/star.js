@@ -71,10 +71,7 @@ export function createdStar(new_star){
 	}
 }
 
-export function createStar(name, title, tagline, personal_url, github_url, 
-	linkedin_url, twittwer_url, facebook_url, skill_1, skill_2, 
-	skill_3, rating_1, rating_2, rating_3, answer_1, answer_2, answer_3, 
-	answer_4, answer_5){
+export function createStar(theState){
 	
 	return (dispatch) => {
 
@@ -85,25 +82,25 @@ export function createStar(name, title, tagline, personal_url, github_url,
 		    	'Content-Type': 'application/json'
 		  	},
 			body: JSON.stringify({
-				personal_url : personal_url, 
-				github_url : github_url, 
-				linkedin_url : linkedin_url, 
-				twittwer_url : twittwer_url, 
-				facebook_url : facebook_url, 
-				name : name, 
-				title : title, 
-				tagline : tagline, 
-				skill_1 : skill_1, 
-				skill_2 : skill_2, 
-				skill_3 : skill_3, 
-				rating_1 : rating_1, 
-				rating_2 : rating_2, 
-				rating_3 : rating_3, 
-				answer_1 : answer_1, 
-				answer_2 : answer_2, 
-				answer_3 : answer_3, 
-				answer_4 : answer_4, 
-				answer_5 : answer_5, 
+				personal_url : theState.personal_url, 
+				github_url : theState.github_url, 
+				linkedin_url : theState.linkedin_url, 
+				twittwer_url : theState.twittwer_url, 
+				facebook_url : theState.facebook_url, 
+				name : theState.name, 
+				title : theState.title, 
+				tagline : theState.tagline, 
+				skill_1 : theState.skill_1, 
+				skill_2 : theState.skill_2, 
+				skill_3 : theState.skill_3, 
+				rating_1 : theState.rating_1, 
+				rating_2 : theState.rating_2, 
+				rating_3 : theState.rating_3, 
+				answer_1 : theState.answer_1, 
+				answer_2 : theState.answer_2, 
+				answer_3 : theState.answer_3, 
+				answer_4 : theState.answer_4, 
+				answer_5 : theState.answer_5, 
 				token: localStorage.getItem('token')
 			})
 		})
