@@ -6,7 +6,7 @@ import Disqus from './Disqus'
 
 function mapStateToProps(state){
 	return{
-		star: state.star
+		story: state.story
 	}
 }
 
@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch){
 export default class DetailComponent extends React.Component{
 
 	componentDidMount(){
-		this.props.getStarDetail(this.props.location.query.star_id)
+		this.props.getStoryDetail(this.props.location.query.story_id)
 			.then(() => {
 
 			})
@@ -30,11 +30,11 @@ export default class DetailComponent extends React.Component{
 	render(){
 		return(
 			<div className='container'>
-				{this.props.location.query.star_id}
+				{this.props.location.query.story_id}
 				<Disqus 
 				shortname='asaastion' 
-				identifier={this.props.location.query.star_id} 
-				title={this.props.star.name}
+				identifier={this.props.location.query.story_id} 
+				title={this.props.story.name}
 				category_id='category_1'
 				onNewComment={this.handleNewComment}/>
 			</div>
@@ -42,6 +42,6 @@ export default class DetailComponent extends React.Component{
 	}
 }
 
-const StarDetail = connect(mapStateToProps, mapDispatchToProps)(DetailComponent)
+const StoryDetail = connect(mapStateToProps, mapDispatchToProps)(DetailComponent)
 
-module.exports = StarDetail
+module.exports = StoryDetail

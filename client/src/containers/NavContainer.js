@@ -29,18 +29,21 @@ class NavContainer extends React.Component{
 
 	render(){
 		return (
-			<header className='mdl-layout__header'>
-				<div className='mdl-layout__header-row'>
-					<span className='mdl-layout__title'><a href='home'>coder_star</a></span>
-					<div className='mdl-layout-spacer'></div>
-					<nav className='mdl-navigation mdl-typography--body-1-force-preferred-font'>
-						<a className='mdl-navigation__link' href='createStar'>create</a>
-						{
-							localStorage.getItem('token') ? 
-							<a className='mdl-navigation__link' href='#' onClick={ (e) => {this.logout(e)} }>logout</a> : 
-							<a className='mdl-navigation__link' href='login'>login</a>
-						}
-					</nav>
+			<header id="header">
+				<div className="headerbar">
+					<div className="headerbar-left">
+						<ul className="header-nav header-nav-options">
+							<li className="header-nav-brand">
+								<div className="brand-holder">
+									<a href="home"><span>coder_stories</span></a>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<div className="headerbar-right">
+
+					</div>
 				</div>
 			</header>
 		)

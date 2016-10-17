@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as actionCreators from '../actions/star'
+import * as actionCreators from '../actions/story'
 import { routeActions } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 import { TextField } from 'react-mdl'
@@ -9,7 +9,7 @@ import StarRatingComponent from 'react-star-rating-component'
 
 function mapStateToProps(state){
 	return{
-		star: state.star
+		story: state.story
 	}
 }
 
@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch){
 	return bindActionCreators(actionCreators, dispatch)
 }
 
-export default class StarForm extends React.Component{
+export default class StoryForm extends React.Component{
 
 	constructor(props){
 		super(props)
@@ -36,7 +36,7 @@ export default class StarForm extends React.Component{
 	handleKeyPress(e){
 		if (e.key === 'Enter'){
 			if (!this.state.disabled){
-				this.createStar(e)
+				this.createStory(e)
 			}
 		}
 	}
@@ -48,11 +48,11 @@ export default class StarForm extends React.Component{
 		this.setState(next_state)
 	}
 
-	createStar(e){
+	createStory(e){
 		e.preventDefault()
 		console.log('author in create saas page: ' + localStorage.getItem('account_id'))
 
-		this.props.createStar(this.state)
+		this.props.createStory(this.state)
 			.then(() => {
 				browserHistory.push('home')
 			})		
@@ -70,7 +70,7 @@ export default class StarForm extends React.Component{
 		return(
 			<div className="mdl-grid" onKeyPress={(e) => this.handleKeyPress(e)}>
 				{
-					<form action='#' className='star-form'>
+					<form action='#' className='story-form'>
 						<div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input className="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" onChange={(e) => this.changeValue(e, 'name')} id='Name'/>
                             <label className="mdl-textfield__label" htmlFor="Name">Name...</label>
@@ -113,7 +113,7 @@ export default class StarForm extends React.Component{
                         	<StarRatingComponent name='rating_3' starCount={5} value={this.state.rating_3} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
                         </div>
                         <p>
-                        	<button type="submit" onClick={(e) => this.createStar(e)} className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create Star</button>
+                        	<button type="submit" onClick={(e) => this.createStory(e)} className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create Story</button>
                         </p>
 					</form>	
 				}
@@ -122,6 +122,6 @@ export default class StarForm extends React.Component{
 	}
 }
 
-const CreateStar = connect(mapStateToProps, mapDispatchToProps)(StarForm)
+const CreateStory = connect(mapStateToProps, mapDispatchToProps)(StoryForm)
 
-module.exports = CreateStar
+module.exports = CreateStory

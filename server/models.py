@@ -2,12 +2,12 @@ from index import app, db, bcrypt
 from datetime import datetime
 import logging
 
-class Star(db.Model):
+class Story(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
 	pub_date = db.Column(db.DateTime)
 
 	author_id = db.Column(db.Integer, db.ForeignKey('account.id'))
-	author = db.relationship('Account', backref = db.backref('star', lazy = 'dynamic'))
+	author = db.relationship('Account', backref = db.backref('story', lazy = 'dynamic'))
 
 	# link section
 	personal_url = db.Column(db.String(255))
@@ -59,7 +59,7 @@ class Star(db.Model):
 		self.pub_date = datetime.utcnow()
 
 	def __repr__(self):
-		return 'Star: %r' % self.name
+		return 'Story: %r' % self.name
 
 	def serialize(self):
 		return{

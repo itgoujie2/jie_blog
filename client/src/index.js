@@ -7,10 +7,10 @@ import configureStore from './store/configureStore'
 import routes from './routes'
 import App from './containers/App'
 import Home from './components/Home'
-import CreateStar from './components/CreateStar'
+import CreateStory from './components/CreateStory'
 import Login from './components/Login'
 import Register from './components/Register'
-import StarDetail from './components/StarDetail'
+import StoryDetail from './components/StoryDetail'
 import { requireAuth } from './components/RequireAuth'
 import 'react-mdl/extra/material.css'
 import 'react-mdl/extra/material.js'
@@ -25,10 +25,10 @@ ReactDOM.render(
 			<Redirect from="/" to="home"/>
 			<Route path="/" component={App}>
 				<Route path="home" component={Home}/>
-				<Route path="createStar" component={requireAuth(CreateStar)}/>
+				<Route path="createStory" component={requireAuth(CreateStory)}/>
 				<Route path="login" component={Login}/>
 				<Route path="register" component={Register}/>
-				<Route path="/star" component={StarDetail}/>
+				<Route path="/story" component={StoryDetail}/>
 			</Route>
 		</Router>
 	</Provider>, 

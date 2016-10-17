@@ -1,11 +1,11 @@
 import { logoutAccount, loginAccount, registerAccount } from './auth'
-import { getAllStar, createStar, getStarDetail } from './star'
+import { getAllStory, createStory, getStoryDetail } from './story'
 
 export{
 	loginAccount, 
 	registerAccount, 
 	logoutAccount, 
-	getAllStar, 
-	createStar, 
-	getStarDetail
+	getAllStory, 
+	createStory, 
+	getStoryDetail
 }

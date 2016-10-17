@@ -22,7 +22,7 @@ import { Link } from 'react-router'
 
 function mapStateToProps(state){
 	return {
-		star: state.star, 
+		story: state.story, 
 		auth: state.auth
 	}
 }
@@ -42,28 +42,28 @@ export default class Main extends React.Component{
 	}
 
 	fetchData(){
-		this.props.getAllStar()
-			.then(console.log(JSON.stringify(this.props.star)))
+		this.props.getAllStory()
+			.then(console.log(JSON.stringify(this.props.story)))
 	}
 
-	renderStar(){
+	renderStory(){
 		const chunk = 4
-		const star_list = this.props.star.data
-		const start = 0
-		const end = star_list.length / 4 + 1
+		const story_list = this.props.story.data
+		const storyt = 0
+		const end = story_list.length / 4 + 1
 		const results = []
 
-		for (let i = start; i < end; i++){
-			const starCards = star_list.slice(i*4, i*4 + chunk).map( (star, j) => {
-				console.log('star detail in for loop: ' + JSON.stringify(star))
+		for (let i = storyt; i < end; i++){
+			const storyCards = story_list.slice(i*4, i*4 + chunk).map( (story, j) => {
+				console.log('story detail in for loop: ' + JSON.stringify(story))
 				return (
 					
-					<a href={`/star?star_id=${star.id}`} key={star.id} className='mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--4dp'>
+					<a href={`/story?story_id=${story.id}`} key={story.id} className='mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--4dp'>
 						<div className='mdl-card__title'>
-							<h2 className='mdl-card__title-text'>{star.name}</h2>
+							<h2 className='mdl-card__title-text'>{story.name}</h2>
 						</div>
 						<div className='mdl-card__supporting-text'>
-							{star.tagline}
+							{story.tagline}
 						</div>
 						<div className='mdl-card__actions mdl-card-boarder'>
 							<span className='mdl-button mdl-button-colored'>test</span>
@@ -75,18 +75,18 @@ export default class Main extends React.Component{
 
 			// TODO: placeholder cards
 
-			// if (starCards.length < chunk){
-			// 	console.log('starCards length: ' + starCards.length)
+			// if (storyCards.length < chunk){
+			// 	console.log('storyCards length: ' + storyCards.length)
 			// 	console.log('chunk: ' + chunk)
-			// 	for (let k=0; k < chunk - starCards.length + 1; k++){
+			// 	for (let k=0; k < chunk - storyCards.length + 1; k++){
 			// 		console.log('k: ' + k)
-			// 		starCards.push(<div className='col-sm-3' key={`placeholder-${k}`}>{k}</div>)
+			// 		storyCards.push(<div className='col-sm-3' key={`placeholder-${k}`}>{k}</div>)
 			// 	}
 			// }
 
 			results.push(
 				<div className='mdl-grid content-grid' key={i}>
-					{starCards}
+					{storyCards}
 				</div>
 			)
 		}
@@ -98,11 +98,11 @@ export default class Main extends React.Component{
 		return(
 			
 			<div >
-				{!this.props.star.loaded || !this.props.star.data
+				{!this.props.story.loaded || !this.props.story.data
 					? <h1>loading...</h1>
 					:
 					<div >
-						{this.renderStar()}
+						{this.renderStory()}
 					</div>
 				}
 			</div>

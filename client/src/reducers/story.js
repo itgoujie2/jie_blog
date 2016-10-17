@@ -1,20 +1,20 @@
-import { FETCH_ALL_STAR, RECEIVED_ALL_STAR, CREATED_STAR } from '../constants/index'
+import { FETCH_ALL_STORY, RECEIVED_ALL_STORY, CREATED_STORY } from '../constants/index'
 
-export function star(state = {loaded: false}, action){
+export function story(state = {loaded: false}, action){
 	switch(action.type){
-		case FETCH_ALL_STAR:
+		case FETCH_ALL_STORY:
 			return Object.assign({}, state, {
 				'loaded': false
 			})
-		case RECEIVED_ALL_STAR:
+		case RECEIVED_ALL_STORY:
 			return Object.assign({}, state, {
-				'data': action.star_list, 
+				'data': action.story_list, 
 				'loaded': true
 			})
-		case CREATED_STAR:
+		case CREATED_STORY:
 			return Object.assign({}, state, {
 				loaded: true, 
-				'new_star': {
+				'new_story': {
 					personal_url : action.payload.personal_url, 
 					github_url : action.payload.github_url, 
 					linkedin_url : action.payload.linkedin_url, 
