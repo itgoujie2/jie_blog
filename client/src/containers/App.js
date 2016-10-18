@@ -5,13 +5,13 @@ export default class App extends React.Component{
 
   render(){
     return (
-      <div className='mdl-layout mdl-js-layout mdl-layout-fixed-header'>
+      <div>
       	<NavContainer/>
-      	<main className=''>
-      		
+      	<div id="base">
+      	  <div id="content">
         		{this.props.children}
-
-        </main>
+          </div>
+        </div>
       </div>
     )
   }

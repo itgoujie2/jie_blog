@@ -49,11 +49,11 @@ class NavContainer extends React.Component{
 							</li>
 						</ul>
 						<ul className="header-nav header-nav-profile">
-							<li className="dropdown">
+							<li >
 								{
 									localStorage.getItem('token') ? 
-									<a className='dropdown-toggle ink-reaction' href='#' onClick={ (e) => {this.logout(e)} }><span>logout</span></a> : 
-									<a className='dropdown-toggle ink-reaction' href='login'><span>login</span></a>
+									<a href='#' onClick={ (e) => {this.logout(e)} }><span>logout</span></a> : 
+									<a href='login'><span>login</span></a>
 								}
 							</li>
 						</ul>

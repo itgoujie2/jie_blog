@@ -67,21 +67,21 @@ export default class StoryForm extends React.Component{
 
 	render(){
 		return(
-			<div className="mdl-grid" onKeyPress={(e) => this.handleKeyPress(e)}>
-				{
-					<form action='#' className='story-form'>
-						<div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input className="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" onChange={(e) => this.changeValue(e, 'name')} id='Name'/>
-                            <label className="mdl-textfield__label" htmlFor="Name">Name...</label>
+			<div className="card card-outlined style-default-light" onKeyPress={(e) => this.handleKeyPress(e)}>
+				
+					<form action='#' className='form story-form'>
+						<div className="form-group floating-label">
+                            <input className="form-control" pattern="[A-Z,a-z, ]*" type="text" onChange={(e) => this.changeValue(e, 'name')} id='Name'/>
+                            <label htmlFor="Name">Name...</label>
                             
                         </div>
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input className="mdl-textfield__input" type="text" onChange={(e) => this.changeValue(e, 'title')} id='Title'/>
-                            <label className="mdl-textfield__label" htmlFor="Title">Title... (ex. Full Stack Developer)</label>
+                        <div className="form-group floating-label">
+                            <input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'title')} id='Title'/>
+                            <label htmlFor="Title">Title... (ex. Full Stack Developer)</label>
                         </div>
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input className="mdl-textfield__input" type="text" onChange={(e) => this.changeValue(e, 'tagline')} id='Tagline'/>
-                            <label className="mdl-textfield__label" htmlFor="Tagline">Tagline... (ex. I build websites with React and Flask)</label>
+                        <div className="form-group floating-label">
+                            <input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'tagline')} id='Tagline'/>
+                            <label htmlFor="Tagline">Tagline... (ex. I build websites with React and Flask)</label>
                         </div>
                         <div>
                         	<i className="form-icons material-icons ion-ios-photos-outline"></i>
@@ -90,32 +90,32 @@ export default class StoryForm extends React.Component{
                         	<i className="form-icons material-icons ion-social-facebook-outline"></i>
                         	<i className="form-icons material-icons ion-social-linkedin-outline"></i>
                         </div>
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        	<input className="mdl-textfield__input" type="text" onChange={(e) => this.changeValue(e, 'skill_1')} id='Skill_1'/>
-                        	<label className="mdl-textfield__label" htmlFor="Skill_1">Skill 1...</label>
+                        <div className="form-group floating-label">
+                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_1')} id='Skill_1'/>
+                        	<label htmlFor="Skill_1">Skill 1...</label>
                         </div>
                         <div>
                         	<StarRatingComponent name='rating_1' starCount={5} value={this.state.rating_1} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
                         </div>
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        	<input className="mdl-textfield__input" type="text" onChange={(e) => this.changeValue(e, 'skill_2')} id='Skill_2'/>
-                        	<label className="mdl-textfield__label" htmlFor="Skill_2">Skill 2...</label>
+                        <div className="form-group floating-label">
+                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_2')} id='Skill_2'/>
+                        	<label htmlFor="Skill_2">Skill 2...</label>
                         </div>
                         <div>
                         	<StarRatingComponent name='rating_2' starCount={5} value={this.state.rating_2} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
                         </div>
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        	<input className="mdl-textfield__input" type="text" onChange={(e) => this.changeValue(e, 'skill_3')} id='Skill_3'/>
-                        	<label className="mdl-textfield__label" htmlFor="Skill_3">Skill 3...</label>
+                        <div className="form-group floating-label">
+                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_3')} id='Skill_3'/>
+                        	<label htmlFor="Skill_3">Skill 3...</label>
                         </div>
                         <div>
                         	<StarRatingComponent name='rating_3' starCount={5} value={this.state.rating_3} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
                         </div>
                         <p>
-                        	<button type="submit" onClick={(e) => this.createStory(e)} className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create Story</button>
+                        	<button type="submit" onClick={(e) => this.createStory(e)} className="btn style-primary-dark">Create Story</button>
                         </p>
 					</form>	
-				}
+				
 			</div>
 		)
 	}

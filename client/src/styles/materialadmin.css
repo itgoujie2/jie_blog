@@ -1139,6 +1139,7 @@ a.text-success:hover {
 #base {
   overflow: hidden;
   padding-left: 64px;
+  padding-right: 64px;
   width: 100%;
   min-height: 100%;
 }

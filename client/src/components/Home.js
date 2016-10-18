@@ -57,19 +57,22 @@ export default class Main extends React.Component{
 			const storyCards = story_list.slice(i*4, i*4 + chunk).map( (story, j) => {
 				console.log('story detail in for loop: ' + JSON.stringify(story))
 				return (
-					
-					<a href={`/story?story_id=${story.id}`} key={story.id} className='mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--4dp'>
-						<div className='mdl-card__title'>
-							<h2 className='mdl-card__title-text'>{story.name}</h2>
+					<div className="col-md-3" key={story.id}>
+						<div className="card card-outlined style-primary" >
+							<a href={`/story?story_id=${story.id}`}>
+								<div className='card-head'>
+									<span >{story.name}</span>
+								</div>
+								<div className='card-body'>
+									<span>{story.title}</span>
+								</div>
+								<div className='card-head'>
+									<span >test</span>
+									
+								</div>
+							</a>
 						</div>
-						<div className='mdl-card__supporting-text'>
-							{story.tagline}
-						</div>
-						<div className='mdl-card__actions mdl-card-boarder'>
-							<span className='mdl-button mdl-button-colored'>test</span>
-							
-						</div>
-					</a>
+					</div>
 				)
 			})
 
@@ -85,7 +88,7 @@ export default class Main extends React.Component{
 			// }
 
 			results.push(
-				<div className='mdl-grid content-grid' key={i}>
+				<div className='row' key={i}>
 					{storyCards}
 				</div>
 			)
@@ -97,11 +100,11 @@ export default class Main extends React.Component{
 	render(){
 		return(
 			
-			<div >
+			<div>
 				{!this.props.story.loaded || !this.props.story.data
 					? <h1>loading...</h1>
 					:
-					<div >
+					<div>
 						{this.renderStory()}
 					</div>
 				}
