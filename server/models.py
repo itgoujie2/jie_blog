@@ -107,7 +107,7 @@ class Account(db.Model):
 	email = db.Column(db.String(200))
 	password = db.Column(db.String(200))
 
-	stories = db.relationship('Story', backref='account', lazy='dynamic', uselist=False)
+	stories = db.relationship('Story', backref='account', uselist=False)
 	answers = db.relationship('Answer', backref='account', lazy='dynamic')
 
 	def __init__(self, email, password):

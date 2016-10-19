@@ -91,13 +91,19 @@ export default class StoryForm extends React.Component{
 		                        	<i className="form-icons material-icons ion-social-facebook-outline"></i>
 		                        	<i className="form-icons material-icons ion-social-linkedin-outline"></i>
 		                        </div>
-		                        <div className="form-group">
-		                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_1')} id='Skill_1'/>
-		                        	<label htmlFor="Skill_1">Skill 1...</label>
+		                        <div className="row">
+		                        	<div className="col-sm-6">
+		                        		<div className="form-group">
+				                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_1')} id='Skill_1'/>
+				                        	<label htmlFor="Skill_1">Skill 1...</label>
+				                        </div>
+		                        	</div>
+			                        <div className="col-sm-6" style={{"verticalAlign": "middle"}}>
+			                        	<StarRatingComponent name='rating_1' starCount={5} value={this.state.rating_1} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
+			                        </div>
 		                        </div>
-		                        <div>
-		                        	<StarRatingComponent name='rating_1' starCount={5} value={this.state.rating_1} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
-		                        </div>
+		                        
+		                        
 		                        <div className="form-group">
 		                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_2')} id='Skill_2'/>
 		                        	<label htmlFor="Skill_2">Skill 2...</label>
