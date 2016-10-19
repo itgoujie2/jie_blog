@@ -2,12 +2,27 @@ from index import app, db, bcrypt
 from datetime import datetime
 import logging
 
+class Question(db.Model):
+	id = db.Column(db.Integer(), primary_key = True)
+	content = db.Column(db.Text)
+
+	answers = db.relationship('Answer', backref='question', lazy='dynamic')
+
+class Answer(db.Model):
+	id = db.Column(db.Integer(), primary_key = True)
+	content = db.Column(db.Text)
+
+	question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+	story_id = db.Column(db.Integer, db.ForeignKey('story.id'))
+	account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+
+
 class Story(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
 	pub_date = db.Column(db.DateTime)
 
 	author_id = db.Column(db.Integer, db.ForeignKey('account.id'))
-	author = db.relationship('Account', backref = db.backref('story', lazy = 'dynamic'))
+	answers = db.relationship('Answer', backref='story', lazy='dynamic')
 
 	# link section
 	personal_url = db.Column(db.String(255))
@@ -91,6 +106,9 @@ class Account(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
 	email = db.Column(db.String(200))
 	password = db.Column(db.String(200))
+
+	stories = db.relationship('Story', backref='account', lazy='dynamic', uselist=False)
+	answers = db.relationship('Answer', backref='account', lazy='dynamic')
 
 	def __init__(self, email, password):
 		self.email = email

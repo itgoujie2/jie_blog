@@ -27,4 +27,7 @@ essy
 ...features
 
 6. comment system (do)
+disqus
+or
+http://stackoverflow.com/questions/11404949/how-to-build-a-tree-in-php-having-id-parent-id-and-depth-variables
 
