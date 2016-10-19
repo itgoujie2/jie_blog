@@ -67,55 +67,59 @@ export default class StoryForm extends React.Component{
 
 	render(){
 		return(
-			<div className="card card-outlined style-default-light" onKeyPress={(e) => this.handleKeyPress(e)}>
-				
-					<form action='#' className='form story-form'>
-						<div className="form-group floating-label">
-                            <input className="form-control" pattern="[A-Z,a-z, ]*" type="text" onChange={(e) => this.changeValue(e, 'name')} id='Name'/>
-                            <label htmlFor="Name">Name...</label>
-                            
-                        </div>
-                        <div className="form-group floating-label">
-                            <input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'title')} id='Title'/>
-                            <label htmlFor="Title">Title... (ex. Full Stack Developer)</label>
-                        </div>
-                        <div className="form-group floating-label">
-                            <input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'tagline')} id='Tagline'/>
-                            <label htmlFor="Tagline">Tagline... (ex. I build websites with React and Flask)</label>
-                        </div>
-                        <div>
-                        	<i className="form-icons material-icons ion-ios-photos-outline"></i>
-                        	<i className="form-icons material-icons ion-social-github-outline"></i>
-                        	<i className="form-icons material-icons ion-social-twitter-outline"></i>
-                        	<i className="form-icons material-icons ion-social-facebook-outline"></i>
-                        	<i className="form-icons material-icons ion-social-linkedin-outline"></i>
-                        </div>
-                        <div className="form-group floating-label">
-                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_1')} id='Skill_1'/>
-                        	<label htmlFor="Skill_1">Skill 1...</label>
-                        </div>
-                        <div>
-                        	<StarRatingComponent name='rating_1' starCount={5} value={this.state.rating_1} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
-                        </div>
-                        <div className="form-group floating-label">
-                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_2')} id='Skill_2'/>
-                        	<label htmlFor="Skill_2">Skill 2...</label>
-                        </div>
-                        <div>
-                        	<StarRatingComponent name='rating_2' starCount={5} value={this.state.rating_2} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
-                        </div>
-                        <div className="form-group floating-label">
-                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_3')} id='Skill_3'/>
-                        	<label htmlFor="Skill_3">Skill 3...</label>
-                        </div>
-                        <div>
-                        	<StarRatingComponent name='rating_3' starCount={5} value={this.state.rating_3} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
-                        </div>
-                        <p>
-                        	<button type="submit" onClick={(e) => this.createStory(e)} className="btn style-primary-dark">Create Story</button>
-                        </p>
+			<div className="row">
+				<div className="col-md-4 col-md-offset-4">
+					<form action='#' className='form ' onKeyPress={(e) => this.handleKeyPress(e)}>
+						<div className="card style-default-dark">
+							<div className="card-head">
+								<header>Create Your Coder Story</header>
+							</div>
+							<div className="card-body form-inverse">
+								<div className="form-group">
+		                            <input className="form-control" pattern="[A-Z,a-z, ]*" type="text" onChange={(e) => this.changeValue(e, 'name')} id='Name'/>
+		                            <label htmlFor="Name">Name...</label>
+		                            
+		                        </div>
+		                        <div className="form-group">
+		                            <input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'title')} id='Title'/>
+		                            <label htmlFor="Title">Title... (ex. Full Stack Developer)</label>
+		                        </div>
+		                        <div>
+		                        	<i className="form-icons material-icons ion-ios-photos-outline"></i>
+		                        	<i className="form-icons material-icons ion-social-github-outline"></i>
+		                        	<i className="form-icons material-icons ion-social-twitter-outline"></i>
+		                        	<i className="form-icons material-icons ion-social-facebook-outline"></i>
+		                        	<i className="form-icons material-icons ion-social-linkedin-outline"></i>
+		                        </div>
+		                        <div className="form-group">
+		                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_1')} id='Skill_1'/>
+		                        	<label htmlFor="Skill_1">Skill 1...</label>
+		                        </div>
+		                        <div>
+		                        	<StarRatingComponent name='rating_1' starCount={5} value={this.state.rating_1} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
+		                        </div>
+		                        <div className="form-group">
+		                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_2')} id='Skill_2'/>
+		                        	<label htmlFor="Skill_2">Skill 2...</label>
+		                        </div>
+		                        <div>
+		                        	<StarRatingComponent name='rating_2' starCount={5} value={this.state.rating_2} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
+		                        </div>
+		                        <div className="form-group">
+		                        	<input className="form-control" type="text" onChange={(e) => this.changeValue(e, 'skill_3')} id='Skill_3'/>
+		                        	<label htmlFor="Skill_3">Skill 3...</label>
+		                        </div>
+		                        <div>
+		                        	<StarRatingComponent name='rating_3' starCount={5} value={this.state.rating_3} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
+		                        </div>
+		                        <p>
+		                        	<button type="submit" onClick={(e) => this.createStory(e)} className="btn style-primary-dark">Create</button>
+		                        </p>
+							</div>
+						</div>
+						
 					</form>	
-				
+				</div>
 			</div>
 		)
 	}

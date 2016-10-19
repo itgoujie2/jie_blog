@@ -140,7 +140,7 @@ def create_account():
 @app.route("/api/get_token", methods=["POST"])
 def get_token():
     incoming = request.get_json()
-    app.logger.info('request in get_token %s', request)
+    app.logger.info('request in get_token %s %s', incoming["email"], incoming["password"])
     account = Account.get_account_with_email_and_password(incoming["email"], incoming["password"])
     if account:
         return jsonify(token=generate_token(account))

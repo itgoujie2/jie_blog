@@ -43,13 +43,21 @@ export default class LoginForm extends React.Component{
 
 	render(){
 		return(
-			<div onKeyPress={(e) => this.handleKeyPress(e)}>
-				<form>
-					<input onChange={(e) => {this.changeValue(e, 'email')}} placeholder="email"/>
-					<input onChange={(e) => {this.changeValue(e, 'password')}} placeholder="password"/>
-					<a href='#' onClick={(e) => {this.login(e)}}>login</a>
-					<span> </span>
-					<a href='register'>register</a>
+			<div className="card card-outlined style-default-light" onKeyPress={(e) => this.handleKeyPress(e)}>
+				<form className="form story-form">
+					<div className="form-group">
+						<input className="form-control" onChange={(e) => {this.changeValue(e, 'email')}} id="Email"/>
+						<label htmlFor="Email">Email...</label>
+					</div>
+					<div className="form-group">
+						<input className="form-control" onChange={(e) => {this.changeValue(e, 'password')}} id="Password"/>	
+						<label htmlFor="Password">Password...</label>
+					</div>
+					<p>
+						<a className="btn style-primary" href="#" onClick={(e) => {this.login(e)}}>login</a>
+						<a className="btn style-primary pull-right" href='register'>register</a>
+					</p>
+					
 				</form>
 			</div>
 		)

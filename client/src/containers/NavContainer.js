@@ -28,7 +28,7 @@ class NavContainer extends React.Component{
 
 	render(){
 		return (
-			<header id="header">
+			<header id="header" className="header-inverse">
 				<div className="headerbar">
 					<div className="headerbar-left">
 						<ul className="header-nav header-nav-options">

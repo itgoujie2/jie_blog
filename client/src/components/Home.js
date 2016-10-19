@@ -58,17 +58,13 @@ export default class Main extends React.Component{
 				console.log('story detail in for loop: ' + JSON.stringify(story))
 				return (
 					<div className="col-md-3" key={story.id}>
-						<div className="card card-outlined style-primary" >
+						<div className="card style-default-dark" >
 							<a href={`/story?story_id=${story.id}`}>
 								<div className='card-head'>
 									<span >{story.name}</span>
 								</div>
 								<div className='card-body'>
 									<span>{story.title}</span>
-								</div>
-								<div className='card-head'>
-									<span >test</span>
-									
 								</div>
 							</a>
 						</div>
