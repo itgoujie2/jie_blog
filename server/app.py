@@ -1,5 +1,5 @@
 from flask import request, jsonify, g
-from models import Story, Account
+from models import Story, Account, Question, Answer
 from index import app, db
 from sqlalchemy.exc import IntegrityError
 from auth import verify_token, generate_token, decode_token
@@ -11,6 +11,15 @@ def all_story():
 
 	if story_list:
 		return jsonify(data = [e.serialize() for e in story_list])
+	else:
+		return jsonify()
+
+@app.route('/api/question_list', methods = ['GET'])
+def all_question():
+	question_list = Question.query.all()
+
+	if question_list:
+		return jsonify(data = [e.serialize() for e in question_list])
 	else:
 		return jsonify()
 

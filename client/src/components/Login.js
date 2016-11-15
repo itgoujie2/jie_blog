@@ -43,22 +43,43 @@ export default class LoginForm extends React.Component{
 
 	render(){
 		return(
-			<div className="card card-outlined style-default-light" onKeyPress={(e) => this.handleKeyPress(e)}>
-				<form className="form story-form">
-					<div className="form-group">
-						<input className="form-control" onChange={(e) => {this.changeValue(e, 'email')}} id="Email"/>
-						<label htmlFor="Email">Email...</label>
-					</div>
-					<div className="form-group">
-						<input className="form-control" onChange={(e) => {this.changeValue(e, 'password')}} id="Password"/>	
-						<label htmlFor="Password">Password...</label>
-					</div>
-					<p>
-						<a className="btn style-primary" href="#" onClick={(e) => {this.login(e)}}>login</a>
-						<a className="btn style-primary pull-right" href='register'>register</a>
-					</p>
+			<div className="row">
+				<div className="col-md-6 col-md-offset-3">
 					
-				</form>
+					<div className="card style-default-dark">
+						<div className="card-head">
+							<span>Login</span>
+						</div>
+						<div className="card-body">
+							<form action="#" className="form" onKeyPress={(e) => this.handleKeyPress(e)}>
+								<div className="form-group">
+									<div className="row">
+										<div className="col-md-2">
+											<label htmlFor="Email">Email</label>
+										</div>
+										<div className="col-md-6">
+											<input className="form-control" onChange={(e) => {this.changeValue(e, 'email')}} id="Email"/>
+										</div>
+									</div>
+								</div>
+								<div className="form-group">
+									<div className="row">
+										<div className="col-md-2">
+											<label htmlFor="Password">Password</label>
+										</div>
+										<div className="col-md-6">
+											<input className="form-control" onChange={(e) => {this.changeValue(e, 'password')}} id="Password"/>	
+										</div>
+									</div>
+								</div>
+							
+								<a className="btn btn-flat style-default-dark" style={{'float': 'left'}} href="#" onClick={(e) => {this.login(e)}}>login</a>
+								<a className="btn btn-flat style-default-dark" style={{'float': 'right'}} href='register'>register</a>
+							</form>
+						</div>
+					</div>
+					
+				</div>
 			</div>
 		)
 	}

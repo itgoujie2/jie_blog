@@ -1140,8 +1140,9 @@ a.text-success:hover {
   overflow: hidden;
   padding-left: 64px;
   padding-right: 64px;
-  width: 100%;
+  /*width: 100%;*/
   min-height: 100%;
+  background-color: #242a31;
 }
 #base > .backdrop {
   position: fixed;
@@ -1161,7 +1162,7 @@ a.text-success:hover {
   position: relative;
   width: 100%;
   left: 0;
-  padding-top: 64px;
+  padding-top: 84px;
 }
 @media (min-width: 1200px) {
   .menubar-pin #base {
@@ -1200,6 +1201,9 @@ a.text-success:hover {
 .headerbar {
   position: relative;
   min-height: 64px;
+  color: #00FF00;
+  padding-left: 64px;
+  padding-right: 64px;
 }
 .headerbar:before,
 .headerbar:after {
@@ -1293,6 +1297,7 @@ a.text-success:hover {
 .header-nav .header-nav-brand .brand-holder {
   display: table-cell;
   vertical-align: middle;
+
 }
 .header-nav .header-nav-brand a {
   text-decoration: none;
@@ -2699,7 +2704,7 @@ label {
   border-top: none;
   border-bottom-color: rgba(12, 12, 12, 0.12);
   background: transparent;
-  color: #0c0c0c;
+  color: #00FF00;
   font-size: 16px;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -5011,11 +5016,12 @@ li.dropdown-progress .progress {
   clear: both;
 }
 .card-head header {
-  display: inline-block;
+  /*display: inline-block;*/
   padding: 11px 24px;
   vertical-align: middle;
   line-height: 17px;
   font-size: 20px;
+  text-align: center;
 }
 .card-head header > h1,
 .card-head header > h2,
@@ -5098,6 +5104,7 @@ li.dropdown-progress .progress {
 .card-body {
   padding: 24px;
   position: relative;
+  text-align: center;
 }
 .card-body:before,
 .card-body:after {
@@ -5156,9 +5163,10 @@ section .style-default-dark,
 section.style-default-dark,
 .offcanvas-pane.style-default-dark,
 .card.style-default-dark {
-  background-color: #20252b;
+  /*background-color: #242a31;*/
+  background-color: black;
   border-color: #20252b;
-  color: #ffffff;
+  color: #00FF00;
 }
 section .style-default-dark .btn-icon-toggle:hover,
 .offcanvas-pane .style-default-dark .btn-icon-toggle:hover,
@@ -5981,6 +5989,7 @@ section.style-info .btn-flat:hover,
   }
   .card-head header {
     padding: 11px 16px;
+    text-align: center;
   }
   .card-head.card-head-xs header {
     padding: 8px 16px;

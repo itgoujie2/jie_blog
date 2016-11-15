@@ -1,5 +1,5 @@
 import { routeActions, push } from 'react-router-redux'
-import { FETCH_ALL_STORY, RECEIVED_ALL_STORY, CREATED_STORY, RECEIVED_CATEGORY } from '../constants/index'
+import { FETCH_ALL_STORY, RECEIVED_ALL_STORY, CREATED_STORY, RECEIVED_CATEGORY, FETCH_ALL_QUESTION, RECEIVED_ALL_QUESTION } from '../constants/index'
 
 export function fetchAllStory(){
 	return{
@@ -7,10 +7,23 @@ export function fetchAllStory(){
 	}
 }
 
+export function fetchAllQuestion(){
+	return {
+		type: FETCH_ALL_QUESTION
+	}
+}
+
 export function receivedAllStory(story_list){
 	return{
 		type: RECEIVED_ALL_STORY, 
 		story_list
+	}
+}
+
+export function receivedAllQuestion(quesiton_list) {
+	return{
+		type: RECEIVED_ALL_QUESTION, 
+		quesiton_list
 	}
 }
 
@@ -25,6 +38,20 @@ export function getAllStory(){
 			})
 			.catch(error => {
 				
+			})
+	}
+}
+
+export function getAllQuestions(){
+	return (dispatch) => {
+		dispatch(fetchAllQuestion())
+		return fetch('/api/question_list')
+			.then(response => response.json())
+			.then(json => {
+				dispatch(receivedAllQuestion(json.data))
+			})
+			.catch(error => {
+
 			})
 	}
 }

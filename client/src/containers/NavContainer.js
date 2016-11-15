@@ -34,7 +34,7 @@ class NavContainer extends React.Component{
 						<ul className="header-nav header-nav-options">
 							<li className="header-nav-brand">
 								<div className="brand-holder">
-									<a href="home"><span>coder_stories</span></a>
+									<a href="home"><h5>coder_stories</h5></a>
 								</div>
 							</li>
 						</ul>

@@ -8,6 +8,18 @@ class Question(db.Model):
 
 	answers = db.relationship('Answer', backref='question', lazy='dynamic')
 
+	def __init__(self, content):
+		self.content = content
+
+	def __repr__(self):
+		return 'Question %r' % self.content
+
+	def serialize(self):
+		return{
+			'id': self.id, 
+			'content': self.content
+		}
+
 class Answer(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
 	content = db.Column(db.Text)
@@ -15,6 +27,21 @@ class Answer(db.Model):
 	question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
 	story_id = db.Column(db.Integer, db.ForeignKey('story.id'))
 	account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+
+	def __init__(self, content, question_id, story_id, account_id):
+		self.content = content
+		self.question_id = question_id
+		self.story_id = story_id
+		self.account_id = account_id
+
+	def serialize(self):
+		return{
+			'id': self.id, 
+			'content': self.content, 
+			'question_id': self.question_id, 
+			'story_id': self.story_id, 
+			'account_id': self.account_id
+		}
 
 
 class Story(db.Model):
