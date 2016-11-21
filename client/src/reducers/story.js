@@ -13,7 +13,8 @@ export function story(state = {loaded: false}, action){
 			})
 		case RECEIVED_ALL_QUESTION:
 			return Object.assign({}, state, {
-				'data': action.question_list
+				'data': action.question_list, 
+				'loaded': true
 			})
 		case CREATED_STORY:
 			return Object.assign({}, state, {

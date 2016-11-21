@@ -1,25 +1,29 @@
+
 a:link{
 	text-decoration: none;
-}
-
-.story-form{
-	width: 500px;
-	margin: auto;
-}
-
-.form-icons{
-	margin: 10px;
-}
-
-.coder-card{
-	width: 200px;
-	height: 200px;
-	/*float: left;*/
-	display: inline-block;
-	vertical-align: top;
-	margin: 1em;
-	border: 1px solid  #00FF00;
-	background-color: black;
 	color: #00FF00;
 }
+
+body{
+	margin: 0;
+}
+
+.container{
+	margin: 0 auto;
+	width: 960px;
+	background-color: #242a31;
+	padding-top: 50px;
+}
+
+.base {
+  overflow: hidden;
+  /*padding-left: 64px;
+  padding-right: 64px;*/
+  /*width: 100%;*/
+  min-height: 100%;
+  background-color: #242a31;
+}
+
+
+
 

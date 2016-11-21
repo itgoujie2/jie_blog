@@ -20,10 +20,10 @@ export function receivedAllStory(story_list){
 	}
 }
 
-export function receivedAllQuestion(quesiton_list) {
+export function receivedAllQuestion(question_list) {
 	return{
 		type: RECEIVED_ALL_QUESTION, 
-		quesiton_list
+		question_list
 	}
 }
 
@@ -48,6 +48,7 @@ export function getAllQuestions(){
 		return fetch('/api/question_list')
 			.then(response => response.json())
 			.then(json => {
+				console.log('res question: ' + JSON.stringify(json.data))
 				dispatch(receivedAllQuestion(json.data))
 			})
 			.catch(error => {

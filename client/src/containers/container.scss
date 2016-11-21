@@ -1,0 +1,23 @@
+.nav-header{
+	background-color: #242a31;
+	height: 40px;
+	padding: 0 60px;
+}
+
+.nav-header-left{
+	float: left;
+	vertical-align: center;
+}
+
+.nav-header-right{
+	float: right;
+}
+
+.nav-header-links{
+	list-style: none;
+}
+
+.nav-header-links li{
+	display: inline-block;
+	margin: 10px;
+}

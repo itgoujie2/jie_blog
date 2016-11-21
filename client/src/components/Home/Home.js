@@ -17,8 +17,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as actionCreators from '../actions/index'
+import * as actionCreators from '../../actions/index'
 import { Link } from 'react-router'
+import './home.scss'
 
 function mapStateToProps(state){
 	return {
@@ -43,7 +44,9 @@ export default class Main extends React.Component{
 
 	fetchData(){
 		this.props.getAllStory()
-			.then(console.log(JSON.stringify(this.props.story)))
+			.then(() => {
+				console.log(JSON.stringify(this.props.story))
+			})
 	}
 
 	renderStory(){
@@ -57,20 +60,20 @@ export default class Main extends React.Component{
 			const storyCards = story_list.slice(i*4, i*4 + chunk).map( (story, j) => {
 				console.log('story detail in for loop: ' + JSON.stringify(story))
 				return (
-					<div className="col-md-3" key={story.id}>
-						<div className="coder-card" >
-							<a href={`/story?story_id=${story.id}`}>
-								<div className='card-head'>
-									<header>
-										<span>{story.name}</span>
-									</header>
-								</div>
-								<div className='card-body'>
-									<span>{story.title}</span>
-								</div>
-							</a>
-						</div>
+					
+					<div className="coder-card" key={story.id}>
+						<a href={`/story?story_id=${story.id}`} className="coder-card-holder">
+							<div className='coder-card-head'>
+								<header>
+									<span>{story.name}</span>
+								</header>
+							</div>
+							<div className='coder-card-body'>
+								<span>{story.title}</span>
+							</div>
+						</a>
 					</div>
+					
 				)
 			})
 
