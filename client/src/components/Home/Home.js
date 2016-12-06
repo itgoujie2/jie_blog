@@ -45,7 +45,8 @@ export default class Main extends React.Component{
 	fetchData(){
 		this.props.getAllStory()
 			.then(() => {
-				console.log(JSON.stringify(this.props.story))
+				console.log('story props in HOME: ' + JSON.stringify(this.props.story))
+				console.log('auth props in HOME: ' + JSON.stringify(this.props.auth))
 			})
 	}
 
@@ -58,7 +59,7 @@ export default class Main extends React.Component{
 
 		for (let i = storyt; i < end; i++){
 			const storyCards = story_list.slice(i*4, i*4 + chunk).map( (story, j) => {
-				console.log('story detail in for loop: ' + JSON.stringify(story))
+				// console.log('story detail in for loop: ' + JSON.stringify(story))
 				return (
 					
 					<div className="coder-card" key={story.id}>

@@ -67,26 +67,26 @@ def create_story():
 	app.logger.info('decode %s', decoded)
 
 	story = Story(
-		name = request.get_json().get('name'), 
-		title = request.get_json().get('title'), 
-		tagline = request.get_json().get('tagline'), 
-		author_id = decode_token(request.get_json().get('token')).get('id'), 
-		personal_url = request.get_json().get('personal_url'), 
-		github_url = request.get_json().get('github_url'), 
-		linkedin_url = request.get_json().get('linkedin_url'), 
-		twitter_url = request.get_json().get('twitter_url'), 
-		facebook_url = request.get_json().get('facebook_url'), 
-		skill_1 = request.get_json().get('skill_1'), 
-		skill_2 = request.get_json().get('skill_2'), 
-		skill_3 = request.get_json().get('skill_3'), 
-		rating_1 = request.get_json().get('rating_1'), 
-		rating_2 = request.get_json().get('rating_2'), 
-		rating_3 = request.get_json().get('rating_3'), 
-		answer_1 = request.get_json().get('answer_1'), 
-		answer_2 = request.get_json().get('answer_2'), 
-		answer_3 = request.get_json().get('answer_3'), 
-		answer_4 = request.get_json().get('answer_4'), 
-		answer_5 = request.get_json().get('answer_5')
+		# name = request.get_json().get('name'), 
+		# title = request.get_json().get('title'), 
+		# tagline = request.get_json().get('tagline'), 
+		# author_id = decode_token(request.get_json().get('token')).get('id'), 
+		# personal_url = request.get_json().get('personal_url'), 
+		# github_url = request.get_json().get('github_url'), 
+		# linkedin_url = request.get_json().get('linkedin_url'), 
+		# twitter_url = request.get_json().get('twitter_url'), 
+		# facebook_url = request.get_json().get('facebook_url'), 
+		# skill_1 = request.get_json().get('skill_1'), 
+		# skill_2 = request.get_json().get('skill_2'), 
+		# skill_3 = request.get_json().get('skill_3'), 
+		# rating_1 = request.get_json().get('rating_1'), 
+		# rating_2 = request.get_json().get('rating_2'), 
+		# rating_3 = request.get_json().get('rating_3'), 
+		# answer_1 = request.get_json().get('answer_1'), 
+		# answer_2 = request.get_json().get('answer_2'), 
+		# answer_3 = request.get_json().get('answer_3'), 
+		# answer_4 = request.get_json().get('answer_4'), 
+		# answer_5 = request.get_json().get('answer_5')
 	)
 
 	app.logger.info('create story %s', story)

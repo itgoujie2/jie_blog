@@ -8,7 +8,8 @@ import './story-form.scss'
 
 function mapStateToProps(state){
 	return{
-		story: state.story
+		story: state.story, 
+		auth: state.auth
 	}
 }
 
@@ -35,7 +36,8 @@ export default class StoryForm extends React.Component{
 	fetchQuestion(){
 		this.props.getAllQuestions()
 			.then(() => {
-				console.log(JSON.stringify(this.props.story))
+				console.log('story props in create story: ' + JSON.stringify(this.props.story))
+				console.log('auth props in create story: ' + JSON.stringify(this.props.auth))
 			})
 	}
 
@@ -52,11 +54,12 @@ export default class StoryForm extends React.Component{
 		const next_state = {}
 		next_state[type] = value
 		this.setState(next_state)
+
 	}
 
 	createStory(e){
 		e.preventDefault()
-		console.log('author in create saas page: ' + localStorage.getItem('account_id'))
+		console.log('author in create saas page: ' + this.props.auth.account_id)
 
 		this.props.createStory(this.state)
 			.then(() => {
@@ -74,7 +77,7 @@ export default class StoryForm extends React.Component{
 						<p>{q.content}</p>
 					</div>
 					<div className="coder-answer">
-						<textarea className="coder-answer-textarea" />
+						<textarea className="coder-answer-textarea" onChange={(e) => {this.changeValue(e, 'answer' + '_' + (index+1) )}}/>
 					</div>
 				</div>
 			)

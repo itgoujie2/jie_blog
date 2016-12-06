@@ -14,6 +14,7 @@ export function auth(state = initialState, action){
 				'isAuthenticated': true, 
 				'token': action.payload.token, 
 				'email': jwtDecode(action.payload.token).email, 
+				'account_id': jwtDecode(action.payload.token).id, 
 				'statusText': 'You have been successfully logged in.'
 			})
 		case LOGIN_ACCOUNT_FAILURE:

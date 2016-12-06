@@ -37,6 +37,7 @@ export default class LoginForm extends React.Component{
 		console.log('password: ' + this.state.password)
 		this.props.loginAccount(this.state.email, this.state.password)
 			.then(() => {
+				//console.log('props after login: ' + JSON.stringify(this.props))
 				browserHistory.push('home')
 			})
 	}
