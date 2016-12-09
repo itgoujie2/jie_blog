@@ -45,8 +45,8 @@ export default class Main extends React.Component{
 	fetchData(){
 		this.props.getAllStory()
 			.then(() => {
-				console.log('story props in HOME: ' + JSON.stringify(this.props.story))
-				console.log('auth props in HOME: ' + JSON.stringify(this.props.auth))
+				//console.log('story props in HOME: ' + JSON.stringify(this.props.story))
+				//console.log('auth props in HOME: ' + JSON.stringify(this.props.auth))
 			})
 	}
 

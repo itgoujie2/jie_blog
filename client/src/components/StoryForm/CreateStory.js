@@ -63,6 +63,7 @@ export default class StoryForm extends React.Component{
 
 		this.props.createStory(this.state)
 			.then(() => {
+				//console.log('state now after hit the create button: ' + JSON.stringify(this.state))
 				browserHistory.push('home')
 			})		
 					
@@ -77,7 +78,7 @@ export default class StoryForm extends React.Component{
 						<p>{q.content}</p>
 					</div>
 					<div className="coder-answer">
-						<textarea className="coder-answer-textarea" onChange={(e) => {this.changeValue(e, 'answer' + '_' + (index+1) )}}/>
+						<textarea className="coder-answer-textarea" onChange={(e) => {this.changeValue(e, q.id )}}/>
 					</div>
 				</div>
 			)

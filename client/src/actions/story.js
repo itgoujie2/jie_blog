@@ -33,7 +33,7 @@ export function getAllStory(){
 		return fetch('/api/story_list')
 			.then(response => response.json())
 			.then(json => {
-				console.log('res data: ' + JSON.stringify(json.data))
+				//console.log('res data: ' + JSON.stringify(json.data))
 				dispatch(receivedAllStory(json.data))
 			})
 			.catch(error => {
@@ -105,34 +105,20 @@ export function createStory(theState){
 
 		console.log('state in createStory: ' + JSON.stringify(theState))
 
+		let request_body = []
+		
+		theState['token'] = localStorage.getItem('token')
+		request_body.push(theState)
+
+		console.log('request_body now: ' + JSON.stringify(request_body))
+
 		return fetch('/api/create_story', {
 			method: 'POST', 
 			headers: {
 			    'Accept': 'application/json',
 		    	'Content-Type': 'application/json'
 		  	},
-			body: JSON.stringify({
-				// personal_url : theState.personal_url, 
-				// github_url : theState.github_url, 
-				// linkedin_url : theState.linkedin_url, 
-				// twittwer_url : theState.twittwer_url, 
-				// facebook_url : theState.facebook_url, 
-				// name : theState.name, 
-				// title : theState.title, 
-				// tagline : theState.tagline, 
-				// skill_1 : theState.skill_1, 
-				// skill_2 : theState.skill_2, 
-				// skill_3 : theState.skill_3, 
-				// rating_1 : theState.rating_1, 
-				// rating_2 : theState.rating_2, 
-				// rating_3 : theState.rating_3, 
-				answer_1 : theState.answer_1, 
-				// answer_2 : theState.answer_2, 
-				// answer_3 : theState.answer_3, 
-				// answer_4 : theState.answer_4, 
-				// answer_5 : theState.answer_5, 
-				token: localStorage.getItem('token')
-			})
+			body: JSON.stringify(request_body)
 		})
 			.then(response => response.json())
 			.then(json => {

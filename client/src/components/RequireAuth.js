@@ -78,7 +78,7 @@ export function requireAuth(Component){
                         .then(res => {
                             if (res.status === 200) {
                             	this.props.loginAccountSuccess(token)
-								console.log(JSON.stringify(this.props))
+								//console.log(JSON.stringify(this.props))
                             } else {
                                 browserHistory.push('/home')
 

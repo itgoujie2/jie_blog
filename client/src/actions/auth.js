@@ -88,7 +88,7 @@ export function loginAccount(email, password){
 	}
 }
 
-export function registerAccount(email, password){
+export function registerAccount(theState){
 	return (dispatch) => {
 		return fetch('/api/create_account', {
 			method: 'POST', 
@@ -97,8 +97,21 @@ export function registerAccount(email, password){
 				'Content-Type': 'application/json'
 			}, 
 			body: JSON.stringify({
-				email: email, 
-				password: password
+				email: theState.email, 
+				password: theState.password, 
+				name: theState.name, 
+				title: theState.title, 
+				skill_1: theState.skill_1, 
+				skill_2: theState.skill_2, 
+				skill_3: theState.skill_3, 
+				rating_1: theState.rating_1, 
+				rating_2: theState.rating_2, 
+				rating_3: theState.rating_3, 
+				personal_url: theState.personal_url, 
+				github_url: theState.github_url, 
+				linkedin_url: theState.linkedin_url, 
+				twitter_url: theState.twitter_url, 
+				facebook_url: theState.facebook_url
 			})
 		})
 			.then(response => response.json())

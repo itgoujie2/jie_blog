@@ -44,9 +44,7 @@ export default class RegisterForm extends React.Component{
 
 	register(e){
 		e.preventDefault()
-		console.log('email: ' + this.state.email)
-		console.log('password: ' + this.state.password)
-		this.props.registerAccount(this.state.email, this.state.password)
+		this.props.registerAccount(this.state)
 			.then(() => {
 				browserHistory.push('home')
 			})
@@ -176,6 +174,66 @@ export default class RegisterForm extends React.Component{
 			                        	<StarRatingComponent name='rating_3' starCount={5} value={this.state.rating_3} emptyStarColor={`#a1aab7`} onStarClick={this.onStarClick.bind(this)}/>
 			                        </div>
 		                        </div>
+
+		                        <div className="row">
+									<div className="col-md-5">
+										<div className="form-group">
+											<label htmlFor="personal_url" className="col-md-2 control-label">Personal URL</label>
+											<div className="col-md-3">
+												<input className="form-control" onChange={(e) => this.changeValue(e, 'personal_url')} id='personal_url'/>
+												<div className="form-control-line"/>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="row">
+									<div className="col-md-5">
+										<div className="form-group">
+											<label htmlFor="github_url" className="col-md-2 control-label">Github URL</label>
+											<div className="col-md-3">
+												<input className="form-control" onChange={(e) => this.changeValue(e, 'github_url')} id='github_url'/>
+												<div className="form-control-line"/>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="row">
+									<div className="col-md-5">
+										<div className="form-group">
+											<label htmlFor="linkedin_url" className="col-md-2 control-label">Linkedin URL</label>
+											<div className="col-md-3">
+												<input className="form-control" onChange={(e) => this.changeValue(e, 'linkedin_url')} id='linkedin_url'/>
+												<div className="form-control-line"/>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="row">
+									<div className="col-md-5">
+										<div className="form-group">
+											<label htmlFor="twitter_url" className="col-md-2 control-label">Twitter URL</label>
+											<div className="col-md-3">
+												<input className="form-control" onChange={(e) => this.changeValue(e, 'twitter_url')} id='twitter_url'/>
+												<div className="form-control-line"/>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="row">
+									<div className="col-md-5">
+										<div className="form-group">
+											<label htmlFor="facebook_url" className="col-md-2 control-label">Facebook URL</label>
+											<div className="col-md-3">
+												<input className="form-control" onChange={(e) => this.changeValue(e, 'facebook_url')} id='facebook_url'/>
+												<div className="form-control-line"/>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 
 							<button onClick={(e) => {this.register(e)}}>Register</button>

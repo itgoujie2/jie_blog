@@ -67,37 +67,25 @@ class Story(db.Model):
 	rating_1 = db.Column(db.Integer)
 	rating_2 = db.Column(db.Integer)
 	rating_3 = db.Column(db.Integer)
-	answer_1 = db.Column(db.Text)
-	answer_2 = db.Column(db.Text)
-	answer_3 = db.Column(db.Text)
-	answer_4 = db.Column(db.Text)
-	answer_5 = db.Column(db.Text)
 
-	def __init__(self, name, title, tagline, author_id, personal_url, github_url, linkedin_url, 
-		twitter_url, facebook_url, skill_1, skill_2, 
-		skill_3, rating_1, rating_2, rating_3, answer_1, answer_2, answer_3, 
-		answer_4, answer_5):
+	def __init__(self, name, title, author_id, skill_1, skill_2, 
+		skill_3, rating_1, rating_2, rating_3, personal_url, github_url, linkedin_url, 
+		twitter_url, facebook_url):
 
-		self.author_id = author_id
-		self.personal_url = personal_url
-		self.github_url = github_url
-		self.linkedin_url = linkedin_url
-		self.twitter_url = twitter_url
-		self.facebook_url = facebook_url
 		self.name = name
 		self.title = title
-		self.tagline = tagline
+		self.author_id = author_id
 		self.skill_1 = skill_1
 		self.skill_2 = skill_2
 		self.skill_3 = skill_3
 		self.rating_1 = rating_1
 		self.rating_2 = rating_2
 		self.rating_3 = rating_3
-		self.answer_1 = answer_1
-		self.answer_2 = answer_2
-		self.answer_3 = answer_3
-		self.answer_4 = answer_4
-		self.answer_5 = answer_5
+		self.personal_url = personal_url
+		self.github_url = github_url
+		self.linkedin_url = linkedin_url
+		self.twitter_url = twitter_url
+		self.facebook_url = facebook_url
 		self.pub_date = datetime.utcnow()
 
 	def __repr__(self):
@@ -121,17 +109,12 @@ class Story(db.Model):
 			'rating_1': self.rating_1, 
 			'rating_2': self.rating_2, 
 			'rating_3': self.rating_3, 
-			'answer_1': self.answer_1, 
-			'answer_2': self.answer_2, 
-			'answer_3': self.answer_3, 
-			'answer_4': self.answer_4, 
-			'answer_5': self.answer_5, 
 			'pub_date': self.pub_date
 		}
 
 class Account(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
-	email = db.Column(db.String(200))
+	email = db.Column(db.String(200), unique = True, primary_key = True)
 	password = db.Column(db.String(200))
 
 	stories = db.relationship('Story', backref='account', uselist=False)
