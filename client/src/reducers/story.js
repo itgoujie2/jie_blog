@@ -1,4 +1,4 @@
-import { FETCH_ALL_STORY, RECEIVED_ALL_STORY, CREATED_STORY, RECEIVED_ALL_QUESTION } from '../constants/index'
+import { FETCH_ALL_STORY, RECEIVED_ALL_STORY, CREATED_STORY, RECEIVED_ALL_QUESTION, RECEIVED_STORY_DETAIL } from '../constants/index'
 
 export function story(state = {loaded: false}, action){
 	switch(action.type){
@@ -40,6 +40,10 @@ export function story(state = {loaded: false}, action){
 					answer_4 : action.payload.answer_4, 
 					answer_5 : action.payload.answer_5
 				}
+			})
+		case RECEIVED_STORY_DETAIL:
+			return Object.assign({}, state, {
+				'data': action.story_detail
 			})
 
 

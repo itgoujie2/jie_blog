@@ -1,5 +1,5 @@
 import { routeActions, push } from 'react-router-redux'
-import { FETCH_ALL_STORY, RECEIVED_ALL_STORY, CREATED_STORY, RECEIVED_CATEGORY, FETCH_ALL_QUESTION, RECEIVED_ALL_QUESTION } from '../constants/index'
+import { FETCH_ALL_STORY, RECEIVED_ALL_STORY, CREATED_STORY, RECEIVED_CATEGORY, FETCH_ALL_QUESTION, RECEIVED_ALL_QUESTION, RECEIVED_STORY_DETAIL } from '../constants/index'
 
 export function fetchAllStory(){
 	return{
@@ -24,6 +24,13 @@ export function receivedAllQuestion(question_list) {
 	return{
 		type: RECEIVED_ALL_QUESTION, 
 		question_list
+	}
+}
+
+export function receivedStoryDetail(story_detail){
+	return{
+		type: RECEIVED_STORY_DETAIL, 
+		story_detail
 	}
 }
 
@@ -63,6 +70,7 @@ export function getStoryDetail(story_id){
 			.then(response => response.json())
 			.then(json => {
 				console.log('story detail: ' + JSON.stringify(json))
+				dispatch(receivedStoryDetail(json))
 			})
 			.catch(error => {
 

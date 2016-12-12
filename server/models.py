@@ -34,6 +34,9 @@ class Answer(db.Model):
 		self.story_id = story_id
 		self.account_id = account_id
 
+	def __repr__(self):
+		return 'Answer: %r' % self.content
+
 	def serialize(self):
 		return{
 			'id': self.id, 
@@ -60,7 +63,6 @@ class Story(db.Model):
 	# text section
 	name = db.Column(db.String(255))
 	title = db.Column(db.String(255))
-	tagline = db.Column(db.String(255))
 	skill_1 = db.Column(db.String(255))
 	skill_2 = db.Column(db.String(255))
 	skill_3 = db.Column(db.String(255))
@@ -102,7 +104,6 @@ class Story(db.Model):
 			'facebook_url': self.facebook_url, 
 			'name': self.name, 
 			'title': self.title, 
-			'tagline': self.tagline, 
 			'skill_1': self.skill_1, 
 			'skill_2': self.skill_2, 
 			'skill_3': self.skill_3, 

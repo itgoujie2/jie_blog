@@ -4,6 +4,7 @@ from index import app, db
 from sqlalchemy.exc import IntegrityError
 from auth import verify_token, generate_token, decode_token
 import logging
+import json
 
 @app.route('/api/story_list', methods = ['GET'])
 def all_story():
@@ -23,6 +24,13 @@ def all_question():
 	else:
 		return jsonify()
 
+def serialize_bundle(bundle):
+	app.logger.info('check bundle %s', bundle)
+	return{
+		'question': bundle['question'], 
+		'answer': bundle['answer']
+	}
+
 
 @app.route('/api/story_detail', methods = ['GET'])
 def story_detail():
@@ -30,12 +38,28 @@ def story_detail():
 	app.logger.info('the story id %s', story_id)
 	story_detail = Story.query.filter_by(id = story_id).first()
 
+	# find all questions
+	questions = Question.query.all()
+
+	# find answers belong to this story
+	answers = Answer.query.filter_by(story_id = story_id).all()
+
+	# construct questions and corresponding answers together
+	question_answer_bundle = []
+	for question in questions:
+		answer = [aser for aser in answers if aser.question_id == question.id][0] if [aser for aser in answers if aser.question_id == question.id] else None
+		question_answer_bundle.append({
+			'question': question.serialize(), 
+			'answer': answer.serialize()
+		})
+
+	app.logger.info('bundle %s', question_answer_bundle)
+
 	if story_detail:
 		return jsonify(
 			id = story_detail.id, 
 			name = story_detail.name, 
 			title = story_detail.title, 
-			tagline = story_detail.tagline, 
 			author_id = story_detail.author_id, 
 			personal_url = story_detail.personal_url, 
 			github_url = story_detail.github_url, 
@@ -48,11 +72,7 @@ def story_detail():
 			rating_1 = story_detail.rating_1, 
 			rating_2 = story_detail.rating_2, 
 			rating_3 = story_detail.rating_3, 
-			answer_1 = story_detail.answer_1, 
-			answer_2 = story_detail.answer_2, 
-			answer_3 = story_detail.answer_3, 
-			answer_4 = story_detail.answer_4, 
-			answer_5 = story_detail.answer_5
+			question_answer_bundle = question_answer_bundle
 		)
 	else:
 		return jsonify()
@@ -61,74 +81,62 @@ def story_detail():
 def create_story():
 
 	incoming = request.get_json()
+	# first iteration, find out the story
 	for item in incoming:
 		for k, v in item.iteritems():
 			if k == 'token':
 				decoded = decode_token(v)
-				account_id = decoded.get(id)
-			else:
-				question_id = k
-				answer_content = v
-	
+				account_id = decoded['id']
+				# get the story based on account id
+				story = Story.query.filter_by(author_id = account_id).first()
 
-	story = Story(
-		# name = request.get_json().get('name'), 
-		# title = request.get_json().get('title'), 
-		# tagline = request.get_json().get('tagline'), 
-		# author_id = decode_token(request.get_json().get('token')).get('id'), 
-		# personal_url = request.get_json().get('personal_url'), 
-		# github_url = request.get_json().get('github_url'), 
-		# linkedin_url = request.get_json().get('linkedin_url'), 
-		# twitter_url = request.get_json().get('twitter_url'), 
-		# facebook_url = request.get_json().get('facebook_url'), 
-		# skill_1 = request.get_json().get('skill_1'), 
-		# skill_2 = request.get_json().get('skill_2'), 
-		# skill_3 = request.get_json().get('skill_3'), 
-		# rating_1 = request.get_json().get('rating_1'), 
-		# rating_2 = request.get_json().get('rating_2'), 
-		# rating_3 = request.get_json().get('rating_3'), 
-		# answer_1 = request.get_json().get('answer_1'), 
-		# answer_2 = request.get_json().get('answer_2'), 
-		# answer_3 = request.get_json().get('answer_3'), 
-		# answer_4 = request.get_json().get('answer_4'), 
-		# answer_5 = request.get_json().get('answer_5')
-	)
+	# second iteration, insert each answer
+	for item in incoming:
+		for k, v in item.iteritems():
+			if k != 'token':
+				app.logger.info('account_id before insert answer %s', account_id)
+				answer = Answer(
+					content = v, 
+					question_id = k, 
+					story_id = story.id, 
+					account_id = account_id
+				)
+				db.session.add(answer)
+
+	db.session.commit()
 
 	app.logger.info('create story %s', story)
 
 	db.session.add(story)
 	db.session.commit()
 
-	new_story = Story.query.filter_by(name = request.get_json().get('name')).first()
-
-	app.logger.info('found new_story %s', new_story)
-
-	if new_story:
-		return jsonify(
-			id = new_story.id, 
-			name = new_story.name, 
-			title = new_story.title, 
-			tagline = new_story.tagline, 
-			author_id = new_story.author_id, 
-			personal_url = new_story.personal_url, 
-			github_url = new_story.github_url, 
-			linkedin_url = new_story.linkedin_url, 
-			twitter_url = new_story.twitter_url, 
-			facebook_url = new_story.facebook_url, 
-			skill_1 = new_story.skill_1, 
-			skill_2 = new_story.skill_2, 
-			skill_3 = new_story.skill_3, 
-			rating_1 = new_story.rating_1, 
-			rating_2 = new_story.rating_2, 
-			rating_3 = new_story.rating_3, 
-			answer_1 = new_story.answer_1, 
-			answer_2 = new_story.answer_2, 
-			answer_3 = new_story.answer_3, 
-			answer_4 = new_story.answer_4, 
-			answer_5 = new_story.answer_5
-		)
-	else:
-		return jsonify()
+	# if new_story:
+	# 	return jsonify(
+	# 		id = new_story.id, 
+	# 		name = new_story.name, 
+	# 		title = new_story.title, 
+	# 		tagline = new_story.tagline, 
+	# 		author_id = new_story.author_id, 
+	# 		personal_url = new_story.personal_url, 
+	# 		github_url = new_story.github_url, 
+	# 		linkedin_url = new_story.linkedin_url, 
+	# 		twitter_url = new_story.twitter_url, 
+	# 		facebook_url = new_story.facebook_url, 
+	# 		skill_1 = new_story.skill_1, 
+	# 		skill_2 = new_story.skill_2, 
+	# 		skill_3 = new_story.skill_3, 
+	# 		rating_1 = new_story.rating_1, 
+	# 		rating_2 = new_story.rating_2, 
+	# 		rating_3 = new_story.rating_3, 
+	# 		answer_1 = new_story.answer_1, 
+	# 		answer_2 = new_story.answer_2, 
+	# 		answer_3 = new_story.answer_3, 
+	# 		answer_4 = new_story.answer_4, 
+	# 		answer_5 = new_story.answer_5
+	# 	)
+	# else:
+	# 	return jsonify()
+	return jsonify()
 
 @app.route('/api/create_account', methods = ['POST'])
 def create_account():
