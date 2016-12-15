@@ -8,7 +8,7 @@ import json
 
 @app.route('/api/story_list', methods = ['GET'])
 def all_story():
-	story_list = Story.query.all()
+	story_list = Story.query.filter_by(answered_question = True)
 
 	if story_list:
 		return jsonify(data = [e.serialize() for e in story_list])
@@ -89,6 +89,8 @@ def create_story():
 				account_id = decoded['id']
 				# get the story based on account id
 				story = Story.query.filter_by(author_id = account_id).first()
+				story.answered_question = True
+				db.session.add(story)
 
 	# second iteration, insert each answer
 	for item in incoming:

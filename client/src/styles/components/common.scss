@@ -1,7 +1,15 @@
+*{
+	font-family: courier new;
+	color: #00FF00
+}
 
-a:link{
+a{
 	text-decoration: none;
 	color: #00FF00;
+}
+
+a:hover{
+	color: yellow;
 }
 
 body{
@@ -11,17 +19,14 @@ body{
 .container{
 	margin: 0 auto;
 	width: 960px;
-	background-color: #242a31;
+	background-color: black;
 	padding-top: 50px;
 }
 
 .base {
   overflow: hidden;
-  /*padding-left: 64px;
-  padding-right: 64px;*/
-  /*width: 100%;*/
   min-height: 100%;
-  background-color: #242a31;
+  background-color: black;
 }
 
 

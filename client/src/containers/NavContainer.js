@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index'
-import './container.scss'
 
 function mapStateToProps(state){
 	return{
@@ -31,20 +30,20 @@ class NavContainer extends React.Component{
 		return (
 			<header className='nav-header'>
 				<div className="nav-header-left">
-					<a href="home"><h3>coder_stories</h3></a>
+					<h3><a href="home">coder_stories</a></h3>
 				</div>
 				<div className="nav-header-right">
 						<ul className="nav-header-links">
 							<li>
 								
-								<a href="createStory"><span>create</span></a>
+								<span><a href="createStory">create</a></span>
 								
 							</li>
 							<li>
 								{
 									localStorage.getItem('token') ? 
-									<a href='#' onClick={ (e) => {this.logout(e)} }><span>logout</span></a> : 
-									<a href='login'><span>login</span></a>
+									<span><a href='#' onClick={ (e) => {this.logout(e)} }>logout</a></span> : 
+									<span><a href='login'>login</a></span>
 								}
 							</li>
 						</ul>

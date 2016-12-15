@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as actionCreators from '../../actions/story'
 import { routeActions } from 'react-router-redux'
 import { browserHistory } from 'react-router'
-import './story-form.scss'
+import './create_story.scss'
 
 function mapStateToProps(state){
 	return{

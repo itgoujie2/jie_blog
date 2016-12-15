@@ -1,0 +1,22 @@
+.login_form{
+	width: 400px;
+	height: 400px;
+	margin: 20px auto;
+	padding: 20px;
+	border: 1px solid #00FF00;
+}
+
+.login_form_row{
+	margin: 20px auto;
+	display: block;
+}
+
+.login_form_label{
+	margin: 0 20px 0 10px;
+}
+
+.login_form_input{
+	display: inline-block;
+	background-color: black;
+	border: 0.5px solid #00FF00;
+}

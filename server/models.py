@@ -54,6 +54,8 @@ class Story(db.Model):
 	author_id = db.Column(db.Integer, db.ForeignKey('account.id'))
 	answers = db.relationship('Answer', backref='story', lazy='dynamic')
 
+	answered_question = db.Column(db.Boolean, default=False)
+
 	# link section
 	personal_url = db.Column(db.String(255))
 	github_url = db.Column(db.String(255))
