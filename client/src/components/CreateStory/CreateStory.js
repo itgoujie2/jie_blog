@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 import * as actionCreators from '../../actions/story'
 import { routeActions } from 'react-router-redux'
 import { browserHistory } from 'react-router'
+import {Editor, EditorState, RichUtils} from 'draft-js'
+import RichEditorExample from './draft_editor.js'
 import './create_story.scss'
 
 function mapStateToProps(state){
@@ -49,8 +51,7 @@ export default class StoryForm extends React.Component{
 		}
 	}
 
-	changeValue(e, type){
-		const value = e.target.value
+	changeValue(value, type){
 		const next_state = {}
 		next_state[type] = value
 		this.setState(next_state)
@@ -72,13 +73,16 @@ export default class StoryForm extends React.Component{
 	renderStoryForm(){
 		const results = []
 		const question_bundle = this.props.story.data.map( (q, index) => {
+			const question_style = {
+				color: 'yellow'
+			}
 			return (
 				<div className="coder-question-answer" key={q.id}>
-					<div className="coder-question" >
-						<p>{q.content}</p>
+					<div className="coder-question">
+						<p style={question_style}>{q.content}</p>
 					</div>
 					<div className="coder-answer">
-						<textarea className="coder-answer-textarea" onChange={(e) => {this.changeValue(e, q.id )}}/>
+						<RichEditorExample question_id = {q.id} onTyping = {this.changeValue.bind(this)}/>
 					</div>
 				</div>
 			)
@@ -90,15 +94,15 @@ export default class StoryForm extends React.Component{
 				<form action='#' className='form ' onKeyPress={(e) => this.handleKeyPress(e)}>
 					<div className="coder-story-form">
 						<div className="card-head">
-							<header>Create Your Coder Story</header>
+							<header><h3>Create Your Coder Story</h3></header>
 						</div>
-						<div className="">
+						<div className="card-body">
 							
 	                        {question_bundle}
 	                       
-	                        <p>
-	                        	<button type="submit" onClick={(e) => this.createStory(e)} className="btn style-primary-dark">Create</button>
-	                        </p>
+	                        
+	                        <a onClick={(e) => this.createStory(e)} className="create_story_button">Create</a>
+	                        
 						</div>
 					</div>
 					

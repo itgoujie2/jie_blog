@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index'
+import LoadingBar from 'react-redux-loading-bar'
 
 function mapStateToProps(state){
 	return{
@@ -47,7 +48,7 @@ class NavContainer extends React.Component{
 								}
 							</li>
 						</ul>
-					</div>
+				</div>
 			</header>
 		)
 	}

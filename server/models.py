@@ -6,8 +6,6 @@ class Question(db.Model):
 	id = db.Column(db.Integer(), primary_key = True)
 	content = db.Column(db.Text)
 
-	answers = db.relationship('Answer', backref='question', lazy='dynamic')
-
 	def __init__(self, content):
 		self.content = content
 
@@ -25,8 +23,11 @@ class Answer(db.Model):
 	content = db.Column(db.Text)
 
 	question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+	question = db.relationship('Question', backref=db.backref('answers', lazy='dynamic'))
 	story_id = db.Column(db.Integer, db.ForeignKey('story.id'))
+	story = db.relationship('Story', backref=db.backref('answers', lazy='dynamic'))
 	account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+	account = db.relationship('Account', backref=db.backref('answers', lazy='dynamic'))
 
 	def __init__(self, content, question_id, story_id, account_id):
 		self.content = content
@@ -52,7 +53,7 @@ class Story(db.Model):
 	pub_date = db.Column(db.DateTime)
 
 	author_id = db.Column(db.Integer, db.ForeignKey('account.id'))
-	answers = db.relationship('Answer', backref='story', lazy='dynamic')
+	account = db.relationship('Account', backref=db.backref('stories', lazy='dynamic'))
 
 	answered_question = db.Column(db.Boolean, default=False)
 
@@ -120,8 +121,7 @@ class Account(db.Model):
 	email = db.Column(db.String(200), unique = True, primary_key = True)
 	password = db.Column(db.String(200))
 
-	stories = db.relationship('Story', backref='account', uselist=False)
-	answers = db.relationship('Answer', backref='account', lazy='dynamic')
+	created_story = db.Column(db.Boolean, default = False)
 
 	def __init__(self, email, password):
 		self.email = email
@@ -129,6 +129,13 @@ class Account(db.Model):
 
 	def __repr__(self):
 		return '<Account %r>' % self.email
+
+	def serialize(self):
+		return{
+			'id': self.id, 
+			'email': self.email, 
+			'created_story': self.created_story
+		}
 
 	@staticmethod
 	def hashed_password(password):

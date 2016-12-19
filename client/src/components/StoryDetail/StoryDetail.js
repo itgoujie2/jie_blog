@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as actionCreators from '../actions/index'
-import Disqus from './Disqus'
+import * as actionCreators from '../../actions/index'
+// import renderHTML from 'react-render-html'
+import Disqus from '../Disqus'
 
 function mapStateToProps(state){
 	return{
@@ -32,7 +33,7 @@ export default class DetailComponent extends React.Component{
 			return (	
 				<div className="question-answers" key={bundle.question.id}>
 					<p>{bundle.question.content}</p>
-					<p>{bundle.answer.content}</p>
+					<p dangerouslySetInnerHTML = {{__html: bundle.answer.content}}></p>
 				</div>
 			)
 		})

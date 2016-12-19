@@ -9,10 +9,13 @@
 	color: #00FF00;
 }*/
 
+.card-head{
+	width: 80%;
+	margin: 10px auto;
+	text-align: center;
+}
 
-
-
-.coder-question-answer{
+.card-body{
 	width: 80%;
 	margin: 10px auto;
 }
@@ -32,4 +35,9 @@
 	color: #00FF00;
 	width: 100%;
 	height: 90%;
+	font-size: 0.875em;
+}
+
+.create_story_button{
+	margin: 20px auto;
 }

@@ -89,8 +89,12 @@ def create_story():
 				account_id = decoded['id']
 				# get the story based on account id
 				story = Story.query.filter_by(author_id = account_id).first()
+				# get the account
+				account = Account.query.filter_by(id = account_id).first()
 				story.answered_question = True
+				account.create_story = True
 				db.session.add(story)
+				db.session.add(account)
 
 	# second iteration, insert each answer
 	for item in incoming:
@@ -189,7 +193,7 @@ def get_token():
     app.logger.info('request in get_token %s %s', incoming["email"], incoming["password"])
     account = Account.get_account_with_email_and_password(incoming["email"], incoming["password"])
     if account:
-        return jsonify(token=generate_token(account))
+        return jsonify(token=generate_token(account), account = account.serialize())
 
     return jsonify(error=True), 403
 

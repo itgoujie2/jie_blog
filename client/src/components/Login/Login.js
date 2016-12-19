@@ -49,14 +49,16 @@ export default class LoginForm extends React.Component{
 				<form action="#" className="login_form" onKeyPress={(e) => this.handleKeyPress(e)}>
 					<div className="login_form_row">
 						<label htmlFor="login_form_email" className="login_form_label">Email:</label>
-						<input className="login_form_input" id="login_form_email" onChange={(e) => this.changeValue(e, 'email')}/>
+						<input type="text" className="login_form_input" id="login_form_email" onChange={(e) => this.changeValue(e, 'email')}/>
 					</div>
 					<div className="login_form_row">
 						<label htmlFor="login_form_password" className="login_form_label">Password:</label>
-						<input className="login_form_input" id="login_form_password" onChange={(e) => this.changeValue(e, 'password')}/>
+						<input type="password" className="login_form_input" id="login_form_password" onChange={(e) => this.changeValue(e, 'password')}/>
 					</div>
-					<a className="login_form_login_button" href="#" onClick={(e) => {this.login(e)}}>login</a>
-					<a className="login_fomr_register_button" href='register'>register</a>
+					<div className="login_form_row">
+						<a className="login_form_login_button" href="#" onClick={(e) => {this.login(e)}}>login</a>
+						<a className="login_fomr_register_button" href='register'>register</a>
+					</div>
 				</form>
 			</div>
 		)
